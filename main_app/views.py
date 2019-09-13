@@ -21,14 +21,17 @@ def home(request):
 def signup(request):
   error_message = ''
   if request.method == 'POST':
-    form = UserCreationForm(request.POST)
+    form = SignUpForm(request.POST)
     if form.is_valid():
-      user = form.save()
+      form.save()
+      username = form.cleaned_data.get('username')
+      raw_password = form.cleaned_data.get('password1')
+      user = authenticate(username=username, password=raw_password)
       login(request, user)
       return redirect('index')
     else:
       error_message = 'Invalid sign up - try again'
-  form = UserCreationForm()
+  form = SignUpForm()
   context = {'form': form, 'error_message': error_message}
   return render(request, 'registration/signup.html', context)
 
@@ -39,7 +42,7 @@ def index(request):
 class MealCreate(LoginRequiredMixin, CreateView):
   model = Meal
   fields = ['name', 'description', 'quantity', 'price']
-  success_url = '/index/'
+  # success_url = '/index/'
   def form_valid(self, form):
     form.instance.user = self.request.user
     return super().form_valid(form)

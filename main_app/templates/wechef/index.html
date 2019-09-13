@@ -3,22 +3,26 @@
 
 <h1>Food Near You</h1>
 
+<!-- <form id="searchform" action="{% url 'blog_search_list_view' %}" method="get" accept-charset="utf-8">
+      <button class="searchbutton" type="submit">
+        <i class="fa fa-search"></i>
+      </button>
+      <input class="searchfield" id="searchbox" name="q" type="text" placeholder="Search">
+</form> -->
+
 {% for meal in meals %}
   <a href="{% url 'detail' meal.id %}">
-    {% for photo in car.photo_set.all %}
+    {% for photo in meal.photo_set.all %}
     <div class="card-image">
         <img class="responsive-img card-panel" src="{{photo.url}}">
     </div>
     <div class="card">
         <div class="card-content">
-            <span class="card-title">{{ cat.name }}</span>
-            <p>Breed: {{ cat.breed }}</p>
-            <p>Description: {{ cat.description }}</p>
-            {% if cat.age > 0 %}
-                <p>Age: {{ cat.age }}</p>
-            {% else %}
-                <p>Age: Kitten</p>
-            {% endif %}
+            <span class="card-title">{{ chef.name }}</span>
+            <p>Dish Title: {{ meal.name }}</p>
+            <p>Cook Name: {{ chef.name }}</p>
+            <p>Meal Description: {{ meal.description }}</p>
+  
         </div>
     </div>
   </a>
