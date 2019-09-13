@@ -4,7 +4,11 @@
 <h1>Food Near You</h1>
 
 {% for meal in meals %}
-  <a href="{% url 'detail' meeal.id %}">
+  <a href="{% url 'detail' meal.id %}">
+    {% for photo in car.photo_set.all %}
+    <div class="card-image">
+        <img class="responsive-img card-panel" src="{{photo.url}}">
+    </div>
     <div class="card">
         <div class="card-content">
             <span class="card-title">{{ cat.name }}</span>
