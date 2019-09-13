@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from datetime import date
 from django.contrib.auth.models import User
 
 class Profile(models.Model):
@@ -11,12 +12,12 @@ class Profile(models.Model):
   state = models.CharField(max_length=30)
   zipcode = models.IntegerField()
 
-class Meal(model.Model):
+class Meal(models.Model):
   name = models.CharField(max_length=50)
   description = models.CharField(max_length=50)
   quantity = models.IntegerField()
   price = models.IntegerField()
-  chef = ForeignKey(User, on_delete=models.CASCADE)
+  chef = models.ForeignKey(User, on_delete=models.CASCADE)
 
   def __str__(self):
     return self.name
@@ -31,7 +32,7 @@ class Transaction(models.Model):
   meal = models.ForeignKey(Meal, on_delete=models.CASCADE)
 
 class Photo(models.Model):
-  url = models.Charfield(max_length=200)
+  url = models.CharField(max_length=200)
   meal = models.ForeignKey(Meal, on_delete=models.CASCADE)
 
   def __str__(self):
