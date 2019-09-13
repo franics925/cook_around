@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
@@ -21,6 +21,7 @@ def home(request):
 def signup(request):
   error_message = ''
   if request.method == 'POST':
+    print('hello')
     form = SignUpForm(request.POST)
     if form.is_valid():
       form.save()
@@ -36,15 +37,15 @@ def signup(request):
   return render(request, 'registration/signup.html', context)
 
 def index(request):
-  meals = Meal.objects.filter(user=request.user)
-  return render(request, 'meal/index.html', { 'meals': meals })
+  meals = Meal.objects.all()
+  return render(request, 'wechef/index.html', { 'meals': meals })
 
 class MealCreate(LoginRequiredMixin, CreateView):
   model = Meal
   fields = ['name', 'description', 'quantity', 'price']
   # success_url = '/index/'
   def form_valid(self, form):
-    form.instance.user = self.request.user
+    form.instance.chef = self.request.user
     return super().form_valid(form)
 
 
