@@ -58,6 +58,11 @@ def index(request):
   meals = Meal.objects.all()
   return render(request, 'meals/index.html', { 'meals': meals })
 
+def profile(request):
+  user = request.user
+  print(user)
+  return render(request, 'wechef/profile.html', {'user': user})
+
 def meal_detail(request, meal_id):
   meal = Meal.objects.get(id=meal_id)
   return render(request, 'meals/detail.html', {
