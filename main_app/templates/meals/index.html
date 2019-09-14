@@ -5,17 +5,17 @@
 
 
 {% for meal in meals %}
-  <a href="{% url 'detail' meal.id %}">
+  <a href="{% url 'details' meal.id %}">
     <!-- {% for photo in meal.photo_set.all %}
     <div class="card-image">
         <img class="responsive-img card-panel" src="{{photo.url}}">
     </div> -->
-    {% endfor %}
+    <!-- {% endfor %} dfsdf-->
     <div class="card">
         <div class="card-content">
-            <span class="card-title">{{ chef.name }}</span>
+            <span class="card-title">{{ meal.chef }}</span>
             <p>Dish Title: {{ meal.name }}</p>
-            <p>Cook Name: {{ chef.name }}</p>
+            <p>Cook Name: {{ meal.chef }}</p>
             <p>Meal Description: {{ meal.description }}</p>
   
         </div>

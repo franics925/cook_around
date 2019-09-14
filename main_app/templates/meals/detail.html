@@ -12,6 +12,10 @@
         <p>Description: {{ meal.description }}</p>
         <p>Price: {{ meal.price }}</p>
         <p>Quantity: {{ meal.qty }}</p>
+      <div class="card-action">
+        <a href="{% url 'meal_update' meal.id %}">Edit</a>
+        <a href="{% url 'meal_delete' meal.id %}">Delete</a>
+      </div>
       </div>
     </div>
   </div>

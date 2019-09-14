@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
@@ -15,6 +15,21 @@ S3_BASE_URL = 'https://s3-us-west-1.amazonaws.com/'
 BUCKET = 'cookaround-jbc'
 
 # Create your views here.
+class MealCreate(LoginRequiredMixin, CreateView):
+  model = Meal
+  fields = ['name', 'description', 'quantity', 'price']
+  def form_valid(self, form):
+    form.instance.chef = self.request.user
+    return super().form_valid(form)
+
+class MealDelete(LoginRequiredMixin, DeleteView):
+  model = Meal
+  success_url = '/meals/'
+
+class MealUpdate(LoginRequiredMixin, UpdateView):
+  model = Meal
+  fields = ['name', 'description', 'quantity', 'price']
+
 def home(request):
     return render(request, 'home.html')
 
@@ -41,22 +56,13 @@ def signup(request):
 
 def index(request):
   meals = Meal.objects.all()
-  return render(request, 'wechef/index.html', { 'meals': meals })
+  return render(request, 'meals/index.html', { 'meals': meals })
 
 def meal_detail(request, meal_id):
   meal = Meal.objects.get(id=meal_id)
   return render(request, 'meals/detail.html', {
     'meal': meal
   })
-
-class MealCreate(LoginRequiredMixin, CreateView):
-  model = Meal
-  fields = ['name', 'description', 'quantity', 'price']
-  # success_url = '/index/'
-  def form_valid(self, form):
-    form.instance.chef = self.request.user
-    return super().form_valid(form)
-
 
 
 
