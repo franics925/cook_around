@@ -7,12 +7,12 @@ from django.dispatch import receiver
 
 class Profile(models.Model):
   user = models.OneToOneField(User, on_delete=models.CASCADE)
-  chef = models.BooleanField()
-  address1 = models.CharField(max_length=50)
-  address2 = models.CharField(max_length=50)
-  city = models.CharField(max_length=50)
-  state = models.CharField(max_length=30)
-  zipcode = models.CharField(max_length=30)
+  chef = models.BooleanField(default=False)
+  address1 = models.CharField(max_length=50, blank=True)
+  address2 = models.CharField(max_length=50, null=True, blank=True)
+  city = models.CharField(max_length=50, blank=True)
+  state = models.CharField(max_length=30, blank=True)
+  zipcode = models.IntegerField(null=True, blank=True)
 
   @receiver(post_save, sender=User)
   def create_user_profile(sender, instance, created, **kwargs):

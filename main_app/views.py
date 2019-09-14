@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -24,14 +24,16 @@ def signup(request):
     form = SignUpForm(request.POST)
     profile_form = ProfileForm(request.POST)
     if form.is_valid():
-      form.save()
-      username = form.cleaned_data.get('username')
-      raw_password = form.cleaned_data.get('password1')
-      user = authenticate(username=username, password=raw_password)
+      user = form.save()
+      user.refresh_from_db()
+      profile_form = ProfileForm(request.POST, instance=user.profile)
+      profile_form.full_clean()
+      profile_form.save()
       login(request, user)
       return redirect('index')
     else:
-      error_message = 'Invalid sign up - try again'
+      print(form.errors)
+      error_message = form.errors
   form = SignUpForm()
   profile_form = ProfileForm()
   context = {'form': form, 'error_message': error_message, 'profile_form': profile_form}
