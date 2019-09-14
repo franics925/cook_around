@@ -6,13 +6,13 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 # from django.db.models import Meal
 from main_app.forms import SignUpForm, ProfileForm
-from .models import Meal
+from .models import Meal, Photo
 
 import uuid
-# import boto3
+import boto3
 
 S3_BASE_URL = 'https://s3-us-west-1.amazonaws.com/'
-BUCKET = 'cookaround-jbc'
+BUCKET = 'wechef'
 
 # Create your views here.
 class MealCreate(LoginRequiredMixin, CreateView):
@@ -64,6 +64,19 @@ def meal_detail(request, meal_id):
     'meal': meal
   })
 
+def add_photo(request, meal_id):
+    photo_file = request.FILES.get('photo-file', None)
+    if photo_file:
+        s3 = boto3.client('s3')
+        key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+        try:
+            s3.upload_fileobj(photo_file, BUCKET, key)
+            url = f"{S3_BASE_URL}{BUCKET}/{key}"
+            photo = Photo(url=url, meal_id=meal_id)
+            photo.save()
+        except:
+            print('An error occurred uploading file to S3')
+    return redirect('details', meal_id=meal_id)
 
 
 
