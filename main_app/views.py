@@ -5,7 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 # from django.db.models import Meal
-from main_app.forms import SignUpForm
+from main_app.forms import SignUpForm, ProfileForm
 from .models import Meal
 
 import uuid
@@ -21,8 +21,8 @@ def home(request):
 def signup(request):
   error_message = ''
   if request.method == 'POST':
-    print('hello')
     form = SignUpForm(request.POST)
+    profile_form = ProfileForm(request.POST)
     if form.is_valid():
       form.save()
       username = form.cleaned_data.get('username')
@@ -33,7 +33,8 @@ def signup(request):
     else:
       error_message = 'Invalid sign up - try again'
   form = SignUpForm()
-  context = {'form': form, 'error_message': error_message}
+  profile_form = ProfileForm()
+  context = {'form': form, 'error_message': error_message, 'profile_form': profile_form}
   return render(request, 'registration/signup.html', context)
 
 def index(request):
@@ -45,8 +46,6 @@ def meals_detail(request, meal_id):
   return render(request, 'meals/detail.html'), {
     'meal': meal
   }
-
-
 
 class MealCreate(LoginRequiredMixin, CreateView):
   model = Meal

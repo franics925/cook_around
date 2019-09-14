@@ -12,7 +12,7 @@ class Profile(models.Model):
   address2 = models.CharField(max_length=50)
   city = models.CharField(max_length=50)
   state = models.CharField(max_length=30)
-  zipcode = models.IntegerField()
+  zipcode = models.CharField(max_length=30)
 
   @receiver(post_save, sender=User)
   def create_user_profile(sender, instance, created, **kwargs):
