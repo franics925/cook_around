@@ -7,5 +7,5 @@ urlpatterns = [
   path('accounts/signup', views.signup, name='signup'),
   path('wechef/', views.index, name='index'),
   path('meals/create/', views.MealCreate.as_view(), name='create_meal'),
-  path('meals/<int:meal_id/', views.meals_detail, name='detail'),
+  path('meals/<int:meal_id>/', views.meal_detail, name='details'),
 ]

@@ -43,11 +43,11 @@ def index(request):
   meals = Meal.objects.all()
   return render(request, 'wechef/index.html', { 'meals': meals })
 
-def meals_detail(request, meal_id):
+def meal_detail(request, meal_id):
   meal = Meal.objects.get(id=meal_id)
-  return render(request, 'meals/detail.html'), {
+  return render(request, 'meals/detail.html', {
     'meal': meal
-  }
+  })
 
 class MealCreate(LoginRequiredMixin, CreateView):
   model = Meal
