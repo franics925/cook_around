@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 # from django.db.models import Meal
 from main_app.forms import SignUpForm, ProfileForm
-from .models import Meal, Photo
+from .models import Meal, Photo, Cart, Review
 
 import uuid
 import boto3
@@ -60,7 +60,6 @@ def index(request):
 
 def profile(request):
   user = request.user
-  print(user)
   return render(request, 'wechef/profile.html', {'user': user})
 
 def meal_detail(request, meal_id):
@@ -83,7 +82,18 @@ def add_photo(request, meal_id):
             print('An error occurred uploading file to S3')
     return redirect('details', meal_id=meal_id)
 
+def cart(request):
+  user = request.user
+  cart = Cart.objects.get(id=user.cart_id)
+  return render('cart')
 
+def add_cart(request, cart_id, meal_id):
+  Cart.objects.get(id=cart_id).meals.add(meal_id)
+  return redirect('details', meal_id=meal_id)
+
+def rmv_cart(request, cart_id, meal_id):
+  Cart.objects.get(id=cart_id).meals.remove(meal_id)
+  return redirect('cart')
 
 
 # class BlogSearchListView(BlogListView):

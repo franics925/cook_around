@@ -12,4 +12,7 @@ urlpatterns = [
   path('meals/<int:pk>/update/', views.MealUpdate.as_view(), name='meal_update'),
   path('meals/<int:pk>/delete/', views.MealDelete.as_view(), name='meal_delete'),
   path('meals/<int:meal_id>/add_photo/', views.add_photo, name='add_photo'),
+  path('cart/', views.cart, name='cart'),
+  path('cart/<int:meal_id>/add_cart/<int:cart_id>/', views.add_cart, name='add_cart'),
+  path('cart/<int:meal_id>/rmv_cart/<int:cart_id>/', views.rmv_cart, name='rmv_cart'),
 ]
