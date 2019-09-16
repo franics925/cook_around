@@ -29,7 +29,7 @@ class Meal(models.Model):
   name = models.CharField(max_length=50)
   description = models.CharField(max_length=50)
   quantity = models.IntegerField()
-  price = models.IntegerField()
+  price = models.DecimalField(default=0.00, max_digits=7, decimal_places=2)
   chef = models.ForeignKey(User, on_delete=models.CASCADE)
 
   def __str__(self):
@@ -43,6 +43,7 @@ class Transaction(models.Model):
   date = models.DateField()
   user = models.ForeignKey(User, on_delete=models.CASCADE)
   meal = models.ForeignKey(Meal, on_delete=models.CASCADE)
+  total = models.DecimalField(default=0.00, max_digits=7, decimal_places=2)
 
 class Photo(models.Model):
   url = models.CharField(max_length=200)
@@ -52,18 +53,21 @@ class Photo(models.Model):
     return f"Photo for meal_id: {self.meal_id} @{self.url}"
 
 class Cart(models.Model):
-  user = models.OneToOneField(User, on_delete=models.CASCADE)
+  user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
   meals = models.ManyToManyField(Meal)
+  total = models.DecimalField(default=0.00, max_digits=7, decimal_places=2)
   quantity = models.IntegerField(null=True, blank=True)
 
-  @receiver(post_save, sender=User)
-  def create_user_cart(sender, instance, created, **kwargs):
-    if created:
-      Cart.objects.create(user=instance)
-  
-  @receiver(post_save, sender=User)
-  def save_user_cart(sender, instance, **kwargs):
-    instance.cart.save()
+class Entry(models.Model):
+  meal = models.ForeignKey(Meal, null=True, on_delete=models.CASCADE)
+  cart = models.ForeignKey(Cart, null=True, on_delete=models.CASCADE)
+  quantity = models.PositiveIntegerField()
+
+@receiver(post_save, sender=Entry)
+def update_cart(sender, instance, **kwargs):
+  line_cost = instance.quantity * instance.meal.line_cost
+  instance.cart.total += line_cost
+  instance.cart.count += instance.quantity
 
 class Review(models.Model):
   user = models.CharField(max_length=100)
