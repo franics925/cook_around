@@ -54,16 +54,16 @@ class Photo(models.Model):
 class Cart(models.Model):
   user = models.OneToOneField(User, on_delete=models.CASCADE)
   meals = models.ManyToManyField(Meal)
-  quantity = models.IntegerField()
+  quantity = models.IntegerField(null=True, blank=True)
 
   @receiver(post_save, sender=User)
-  def create_user_profile(sender, instance, created, **kwargs):
+  def create_user_cart(sender, instance, created, **kwargs):
     if created:
-      Profile.objects.create(user=instance)
+      Cart.objects.create(user=instance)
   
   @receiver(post_save, sender=User)
-  def save_user_profile(sender, instance, **kwargs):
-    instance.profile.save()
+  def save_user_cart(sender, instance, **kwargs):
+    instance.cart.save()
 
 class Review(models.Model):
   user = models.CharField(max_length=100)
