@@ -57,6 +57,7 @@ class Cart(models.Model):
   meals = models.ManyToManyField(Meal)
   total = models.DecimalField(default=0.00, max_digits=7, decimal_places=2)
   quantity = models.IntegerField(null=True, blank=True)
+  active = models.BooleanField(default=True)
 
 class Entry(models.Model):
   meal = models.ForeignKey(Meal, null=True, on_delete=models.CASCADE)

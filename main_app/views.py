@@ -82,10 +82,14 @@ def add_photo(request, meal_id):
             print('An error occurred uploading file to S3')
     return redirect('details', meal_id=meal_id)
 
-def cart(request):
+def my_cart(request):
   user = request.user
-  cart = Cart.objects.get(id=user.cart_id)
-  return render('cart')
+  my_cart = Cart.objects.get_or_create(user=user, active=True)
+  print(my_cart)
+  return render(request, 'wechef/cart.html', {
+    'my_cart': my_cart,
+    'user': user
+  })
 
 def add_cart(request, cart_id, meal_id):
   Cart.objects.get(id=cart_id).meals.add(meal_id)
