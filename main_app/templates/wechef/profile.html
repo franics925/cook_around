@@ -3,17 +3,15 @@
 
 <h1>Profile</h1>
 <hr />
-<div class="card">
-<p>Chef:{{ user.username }}</p> 
-<p>First Name: {{ user.first_name }}</p> 
-<p>Last Name: {{ user.last_name }}</p> 
-<p>Email Address: {{ user.email }}</p> 
-<p>Chef's Profile:
-<p>Chef box checked? {{ user.profile.chef }}</p> 
-<p>Chef's Address {{ user.profile.address1 }}</p> 
-<p>Chef's Address {{ user.profile.address2 }}</p> 
-<p>City: {{ user.profile.city }}</p> 
-<p>State: {{ user.profile.state }}</p> 
-<p>Zipcode: {{ user.profile.zipcode }}</p> 
-</div>
+<p>{{ user.username }}</p> 
+<p>{{ user.first_name }}</p> 
+<p>{{ user.last_name }}</p> 
+<p>{{ user.email }}</p> 
+<p>{{ user.profile.chef }}</p> 
+<p>{{ user.profile.address1 }}</p> 
+<p>{{ user.profile.address2 }}</p> 
+<p>{{ user.profile.city }}</p> 
+<p>{{ user.profile.state }}</p> 
+<p>{{ user.profile.zipcode }}</p> 
+
 {% endblock %}
