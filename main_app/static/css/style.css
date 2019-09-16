@@ -6,12 +6,24 @@
 
 .logo {
     float: left;
-    width: 5%;
+    width: 8%;
+}
+body {
+    background-color: aliceblue;
 }
 
 img {
     display: block;
     width: 25%;
+}
+
+btn {
+    border-bottom-width: 0em;
+    padding: .5rem 1rem;
+    font-size: 1.25rem;
+    line-height: 1.5;
+    border-radius: .3rem;
+    border-color: black;
 }
 
 .card {
@@ -25,9 +37,9 @@ p {
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
-    color: rgb(27, 33, 39, .8);
+    color: rgba(27, 33, 39, .8);
     text-align: left;
-    background-color: rgb(255, 255, 255, .5);
+    background-color: rgba(162, 216, 37, 0.5);
 }
 
 ul {
@@ -36,14 +48,17 @@ ul {
     flex-flow: nowrap;
     justify-content: space-evenly;
     align-content: flex-end;
-    background-color: rgb(36, 39, 41, 1.1) ;
+    color: rgba(27, 33, 39, .1);
+    background-color: rgba(2, 1, 14, 0.9);
 }
 
 ul:hover {
-    color: rgb(209, 94, 18);
+    /* color: rgb(209, 94, 18); */
+    color: rgba(162, 216, 37, 0.5);
+
 }
 
 footer {
     margin-top: 5%;
-    margin-left: 5%;
+    margin-left: 6%;
 }
