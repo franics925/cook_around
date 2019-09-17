@@ -85,10 +85,16 @@ def add_photo(request, meal_id):
 def my_cart(request):
   user = request.user
   my_cart = Cart.objects.get_or_create(user=user, active=True)
+  meals = Meal.objects.get.all()
+  if request.POST:
+    meal_id = request.POST.get('meal_id')
+    meal = Meal.objects.get(id=meal_id)
+    quantity = request.POST.get('meal_quantity')
+    Entry.objects.create(cart=my_cart, meal=meal, quantity=quantity)
   print(my_cart)
   return render(request, 'wechef/cart.html', {
     'my_cart': my_cart,
-    'user': user
+    'user': user,
   })
 
 def add_cart(request, cart_id, meal_id):
