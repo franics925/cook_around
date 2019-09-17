@@ -1,8 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>WeChef'n</h1>
-<hr />
-<p>Join a revolution in eating</p>
+
+<div id="homepage">
+    <h1>WeChef'n</h1>
+    <p>Join a revolution in eating</p>
+    <a class="nav-link" href="{% url 'signup' %}">Sign Up</a>
+</div>
+
 
 {% endblock %}
