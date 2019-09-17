@@ -91,10 +91,11 @@ def my_cart(request):
   meal_id = request.POST.get('meal_id')
   meal = Meal.objects.get(id=meal_id)
   quantity = Decimal(request.POST.get('meal_quantity'))
+  price = meal.price
   if request.POST and (quantity > meal.quantity):
     print('error here')
   elif request.POST and (quantity <= meal.quantity):
-    Entry.objects.create(cart=my_cart, meal=meal, quantity=quantity)
+    Entry.objects.create(cart=my_cart, meal=meal, quantity=quantity, price=price)
   return render(request, 'wechef/cart.html', {
     'my_cart': my_cart,
     'user': user,

@@ -63,6 +63,7 @@ class Entry(models.Model):
   meal = models.ForeignKey(Meal, null=True, on_delete=models.CASCADE)
   cart = models.ForeignKey(Cart, null=True, on_delete=models.CASCADE)
   quantity = models.PositiveIntegerField()
+  price = models.DecimalField(default=0.00, max_digits=7, decimal_places=2)
 
 @receiver(post_save, sender=Entry)
 def update_cart(sender, instance, **kwargs):

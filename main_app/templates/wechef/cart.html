@@ -7,19 +7,19 @@
 <h1>Entries</h1>
 <h2>{{my_cart.user.username}}</h2>
 
-{% if my_cart.count %}
-<p>Total meals in cart: {{my_cart.count}}</p>
-<p>Total Cost: ${{my_cart.total}}</p>
-{% endif %}
 
 {% for entry in entries %} 
-<p>{{ entry.meal }}</p>
-<p>{{ entry.quantity }}</p>
+<p>{{ entry.meal }} : $ {{ entry.price }}</p>
+<p>x {{ entry.quantity }}</p>
 
 {% empty %}
 Nothing in cart
 
 {% endfor %}
 
+{% if my_cart.count %}
+<p>Total meals in cart: {{my_cart.count}}</p>
+<p>Total Cost: ${{my_cart.total}}</p>
+{% endif %}
 
 {% endblock %}
