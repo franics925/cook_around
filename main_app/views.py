@@ -55,6 +55,8 @@ def signup(request):
   return render(request, 'registration/signup.html', context)
 
 def index(request):
+  user = request.user
+  my_cart, created = Cart.objects.get_or_create(user=user)
   meals = Meal.objects.all()
   return render(request, 'meals/index.html', { 'meals': meals })
 
