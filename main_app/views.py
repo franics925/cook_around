@@ -97,7 +97,10 @@ def add_photo(request, meal_id):
 
 def my_cart(request):
   user = request.user
-  my_cart, created = Cart.objects.get_or_create(user=user)
+  my_cart, created = Cart.objects.get_or_create(user=user, active=True)
+  # my_cart = Cart.objects.filter(user=user, active=True)
+  # if not my_cart:
+  #   my_cart = Cart.objects.create(user=user)
   entries = Entry.objects.all()
   if request.POST:
     meal_id = request.POST.get('meal_id')
@@ -112,13 +115,13 @@ def my_cart(request):
     'entries': entries,
   })
 
-def add_cart(request, cart_id, meal_id):
-  Cart.objects.get(id=cart_id).meals.add(meal_id)
-  return redirect('details', meal_id=meal_id)
+def create_tran(request):
+  user = request.user
+  my_cart = Cart.objects.get(user=user)
+  entries = Entry.objects.get(cart=my_cart)
+  meal = Meal.objects.get(id=meal_id)
+  Transaction.create()
 
-def rmv_cart(request, cart_id, meal_id):
-  Cart.objects.get(id=cart_id).meals.remove(meal_id)
-  return redirect('cart')
 
 
 # class BlogSearchListView(BlogListView):

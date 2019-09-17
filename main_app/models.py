@@ -38,13 +38,6 @@ class Meal(models.Model):
   def get_absolute_url(self):
     return reverse('details', kwargs={'meal_id': self.id})
 
-class Transaction(models.Model):
-  quantity = models.IntegerField()
-  date = models.DateField()
-  user = models.ForeignKey(User, on_delete=models.CASCADE)
-  meal = models.ForeignKey(Meal, on_delete=models.CASCADE)
-  total = models.DecimalField(default=0.00, max_digits=7, decimal_places=2)
-
 class Photo(models.Model):
   url = models.CharField(max_length=200)
   meal = models.ForeignKey(Meal, on_delete=models.CASCADE)
@@ -85,5 +78,12 @@ class Review(models.Model):
   rating = models.IntegerField(validators=[MaxValueValidator(5), MinValueValidator(1)])
   meal = models.ForeignKey(Meal, on_delete=models.CASCADE)
 
+class Transaction(models.Model):
+  quantity = models.IntegerField()
+  date = models.DateField(auto_now_add=True)
+  user = models.ForeignKey(User, on_delete=models.CASCADE)
+  meal = models.ForeignKey(Meal, on_delete=models.CASCADE)
+  cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
+  total = models.DecimalField(default=0.00, max_digits=7, decimal_places=2)
 
 # Create your models here.
