@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, reverse
+from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib import messages
 from django.contrib.auth import login
@@ -30,6 +31,11 @@ class MealDelete(LoginRequiredMixin, DeleteView):
 class MealUpdate(LoginRequiredMixin, UpdateView):
   model = Meal
   fields = ['name', 'description', 'quantity', 'price']
+
+class CartDelete(LoginRequiredMixin, DeleteView):
+  model = Cart
+  def get_success_url(self):
+        return reverse_lazy('cart')
 
 def home(request):
     return render(request, 'home.html')
@@ -88,14 +94,13 @@ def my_cart(request):
   user = request.user
   my_cart, created = Cart.objects.get_or_create(user=user)
   entries = Entry.objects.all()
-  meal_id = request.POST.get('meal_id')
-  meal = Meal.objects.get(id=meal_id)
-  quantity = Decimal(request.POST.get('meal_quantity'))
-  price = meal.price
-  if request.POST and (quantity > meal.quantity):
-    print('error here')
-  elif request.POST and (quantity <= meal.quantity):
-    Entry.objects.create(cart=my_cart, meal=meal, quantity=quantity, price=price)
+  if request.POST:
+    meal_id = request.POST.get('meal_id')
+    meal = Meal.objects.get(id=meal_id)
+    quantity = Decimal(request.POST.get('meal_quantity'))
+    price = meal.price
+    if (quantity <= meal.quantity):
+      Entry.objects.create(cart=my_cart, meal=meal, quantity=quantity, price=price)
   return render(request, 'wechef/cart.html', {
     'my_cart': my_cart,
     'user': user,
