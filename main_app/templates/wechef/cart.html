@@ -4,13 +4,14 @@
 <h1>My Cart</h1>
 <hr />
 
+
+
 {% for cart in my_cart %}
 <p>{{cart.user.username}}</p>
 <p>{{cart.id}}</p>
 <p>{{cart.meals.name}}</p>
-<p>{{cart.quantity}}</p>
-<p>{{cart.total}}</p>
-<p>{{cart.active}}</p>
+<p>Count: {{cart.count}}</p>
+<p>Total Cost: ${{cart.total}}</p>
 
 {% empty %}
 Nothing in cart

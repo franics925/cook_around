@@ -56,7 +56,7 @@ class Cart(models.Model):
   user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
   meals = models.ManyToManyField(Meal)
   total = models.DecimalField(default=0.00, max_digits=7, decimal_places=2)
-  quantity = models.IntegerField(null=True, blank=True)
+  count = models.IntegerField(null=True, blank=True)
   active = models.BooleanField(default=True)
 
 class Entry(models.Model):
@@ -66,7 +66,7 @@ class Entry(models.Model):
 
 @receiver(post_save, sender=Entry)
 def update_cart(sender, instance, **kwargs):
-  line_cost = instance.quantity * instance.meal.line_cost
+  line_cost = instance.quantity * instance.meal.price
   instance.cart.total += line_cost
   instance.cart.count += instance.quantity
 
