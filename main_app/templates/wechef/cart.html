@@ -4,17 +4,16 @@
 <h1>My Cart</h1>
 <hr />
 
+<h1>Entries</h1>
+<h2>{{my_cart.user.username}}</h2>
 
+{% for entry in entries %} 
+<p>{{ entry.meal }}</p>
+<p>{{ entry.quantity }}</p>
 
-{% for cart in my_cart %}
-<p>{{cart.user.username}}</p>
-<p>{{cart.id}}</p>
-<p>{{cart.meals.name}}</p>
-<p>Count: {{cart.count}}</p>
-<p>Total Cost: ${{cart.total}}</p>
-
-{% empty %}
-Nothing in cart
 {% endfor %}
+
+<p>Count: {{my_cart.count}}</p>
+<p>Total Cost: ${{my_cart.total}}</p>
 
 {% endblock %}
