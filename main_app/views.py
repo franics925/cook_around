@@ -1,12 +1,14 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
+from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.contrib import messages
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-# from django.db.models import Meal
+from decimal import Decimal
 from main_app.forms import SignUpForm, ProfileForm
-from .models import Meal, Photo
+from .models import Meal, Photo, Cart, Review, Entry
 
 import uuid
 import boto3
@@ -30,6 +32,11 @@ class MealUpdate(LoginRequiredMixin, UpdateView):
   model = Meal
   fields = ['name', 'description', 'quantity', 'price']
 
+class CartDelete(LoginRequiredMixin, DeleteView):
+  model = Cart
+  def get_success_url(self):
+        return reverse_lazy('cart')
+
 def home(request):
     return render(request, 'home.html')
 
@@ -47,7 +54,6 @@ def signup(request):
       login(request, user)
       return redirect('index')
     else:
-      print(form.errors)
       error_message = form.errors
   form = SignUpForm()
   profile_form = ProfileForm()
@@ -55,12 +61,13 @@ def signup(request):
   return render(request, 'registration/signup.html', context)
 
 def index(request):
+  user = request.user
+  my_cart, created = Cart.objects.get_or_create(user=user)
   meals = Meal.objects.all()
   return render(request, 'meals/index.html', { 'meals': meals })
 
 def profile(request):
   user = request.user
-  print(user)
   return render(request, 'wechef/profile.html', {'user': user})
 
 def meal_detail(request, meal_id):
@@ -70,20 +77,43 @@ def meal_detail(request, meal_id):
   })
 
 def add_photo(request, meal_id):
-    photo_file = request.FILES.get('photo-file', None)
-    if photo_file:
-        s3 = boto3.client('s3')
-        key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
-        try:
-            s3.upload_fileobj(photo_file, BUCKET, key)
-            url = f"{S3_BASE_URL}{BUCKET}/{key}"
-            photo = Photo(url=url, meal_id=meal_id)
-            photo.save()
-        except:
-            print('An error occurred uploading file to S3')
-    return redirect('details', meal_id=meal_id)
+  photo_file = request.FILES.get('photo-file', None)
+  if photo_file:
+    s3 = boto3.client('s3')
+    key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+    try:
+      s3.upload_fileobj(photo_file, BUCKET, key)
+      url = f"{S3_BASE_URL}{BUCKET}/{key}"
+      photo = Photo(url=url, meal_id=meal_id)
+      photo.save()
+    except:
+      print('An error occurred uploading file to S3')
+  return redirect('details', meal_id=meal_id)
 
+def my_cart(request):
+  user = request.user
+  my_cart, created = Cart.objects.get_or_create(user=user)
+  entries = Entry.objects.all()
+  if request.POST:
+    meal_id = request.POST.get('meal_id')
+    meal = Meal.objects.get(id=meal_id)
+    quantity = Decimal(request.POST.get('meal_quantity'))
+    price = meal.price
+    if (quantity <= meal.quantity):
+      Entry.objects.create(cart=my_cart, meal=meal, quantity=quantity, price=price)
+  return render(request, 'wechef/cart.html', {
+    'my_cart': my_cart,
+    'user': user,
+    'entries': entries,
+  })
 
+def add_cart(request, cart_id, meal_id):
+  Cart.objects.get(id=cart_id).meals.add(meal_id)
+  return redirect('details', meal_id=meal_id)
+
+def rmv_cart(request, cart_id, meal_id):
+  Cart.objects.get(id=cart_id).meals.remove(meal_id)
+  return redirect('cart')
 
 
 # class BlogSearchListView(BlogListView):
