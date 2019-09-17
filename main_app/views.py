@@ -37,6 +37,11 @@ class CartDelete(LoginRequiredMixin, DeleteView):
   def get_success_url(self):
         return reverse_lazy('cart')
 
+class EntryDelete(LoginRequiredMixin, DeleteView):
+  model = Entry
+  def get_success_url(self):
+        return reverse_lazy('cart')
+
 def home(request):
     return render(request, 'home.html')
 

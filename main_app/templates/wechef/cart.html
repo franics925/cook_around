@@ -13,8 +13,12 @@
 
 
 {% for entry in entries %} 
-<p>{{ entry.meal }} : $ {{ entry.price }}</p>
-<p>x {{ entry.quantity }}</p>
+<p>{{ entry.meal }} : $ {{ entry.price }} x {{ entry.quantity }}
+  <form action="{% url 'rmv_entry' entry.id %}" method="POST">
+    {% csrf_token %}
+    <input type="submit" class="btn" value="x">
+  </form>
+</p>
 
 {% empty %}
 Nothing in cart
