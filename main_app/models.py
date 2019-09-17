@@ -8,7 +8,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 
 
 class Profile(models.Model):
-  user = models.OneToOneField(User, on_delete=models.CASCADE)
+  user = models.OneToOneField(User, primary_key=True, on_delete=models.CASCADE)
   chef = models.BooleanField(default=False)
   address1 = models.CharField(max_length=50, blank=True)
   address2 = models.CharField(max_length=50, null=True, blank=True)

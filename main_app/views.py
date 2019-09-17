@@ -4,7 +4,7 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-# from django.db.models import Meal
+from decimal import Decimal
 from main_app.forms import SignUpForm, ProfileForm
 from .models import Meal, Photo, Cart, Review, Entry
 
@@ -86,12 +86,11 @@ def my_cart(request):
   user = request.user
   my_cart, created = Cart.objects.get_or_create(user=user)
   entries = Entry.objects.all()
-  print(entries)
   meals = Meal.objects.all()
   if request.POST:
     meal_id = request.POST.get('meal_id')
     meal = Meal.objects.get(id=meal_id)
-    quantity = request.POST.get('meal_quantity')
+    quantity = Decimal(request.POST.get('meal_quantity'))
     Entry.objects.create(cart=my_cart, meal=meal, quantity=quantity)
   return render(request, 'wechef/cart.html', {
     'my_cart': my_cart,
