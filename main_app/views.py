@@ -104,10 +104,11 @@ def my_cart(request):
   filt = {'user': user, 'active': True}
   # my_cart, created = Cart.objects.get_or_create(user=user, active=True)
   my_cart = Cart.objects.filter(**filt).first()
+  efilt = {'cart': my_cart, 'active': True}
   print(my_cart)
   if not my_cart:
     my_cart = Cart.objects.create(user=user)
-  entries = Entry.objects.all()
+  entries = Entry.objects.filter(**efilt)
   if request.POST:
     meal_id = request.POST.get('meal_id')
     meal = Meal.objects.get(id=meal_id)
@@ -126,6 +127,9 @@ def create_tran(request, cart_id):
   filt = {'user': user, 'active': True}
   my_cart = Cart.objects.filter(**filt).first()
   entries = Entry.objects.filter(cart=my_cart)
+  for entry in entries:
+    entry.active = False
+    entry.save()
   tran = Transaction.objects.create(user=user, cart=my_cart)
   my_cart.active = False
   my_cart.save()
