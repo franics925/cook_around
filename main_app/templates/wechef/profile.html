@@ -9,11 +9,13 @@
 <p>Last Name: {{ user.last_name }}</p> 
 <p>Email Address: {{ user.email }}</p> 
 <p>Chef's Profile:
+{% if user.profile.chef %}
 <p>Chef box checked? {{ user.profile.chef }}</p> 
 <p>Chef's Address {{ user.profile.address1 }}</p> 
 <p>Chef's Address {{ user.profile.address2 }}</p> 
 <p>City: {{ user.profile.city }}</p> 
 <p>State: {{ user.profile.state }}</p> 
 <p>Zipcode: {{ user.profile.zipcode }}</p> 
+{% endif %}
 </div>
 {% endblock %}
