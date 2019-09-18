@@ -20,8 +20,12 @@
         <p>Price: {{ meal.price }}</p>
         <p>Quantity: {{ meal.quantity }}</p>
         <div class="card-action">
-          <a href="{% url 'meal_update' meal.id %}">Edit</a>
-          <a href="{% url 'meal_delete' meal.id %}">Delete</a>
+          <div class="btn">
+            <a href="{% url 'meal_update' meal.id %}">Edit</a>
+          </div>
+          <div class="btn">
+            <a href="{% url 'meal_delete' meal.id %}">Delete</a>
+          </div>
           <form action="{% url 'cart' %}" method="POST">
           {% csrf_token %}
           <input type="hidden" value="{{ meal.id }}" name="meal_id">
