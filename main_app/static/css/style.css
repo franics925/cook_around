@@ -2,6 +2,12 @@
   box-sizing: border-box;
 }
 
+main {
+    background: rgba(255, 255, 255, 0.4);
+    background-image:url(../images/color-diet-food-255501.jpg);
+    background-position: center;
+}
+
 #headerLogo {
     display: block;
     width: 85px;
@@ -34,6 +40,10 @@ input.btn {
     max-width: none;
 }
 
+#signup_page {
+    color:red;
+}
+
 
 ul li{
     display: flex;
@@ -56,7 +66,8 @@ footer {
 
 a {
     padding: 10px;
-    color: black;
+    color: orange;
+    border: 3em;
 }
 
 #homepage {
@@ -64,8 +75,10 @@ a {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-image:url(../images/color-diet-food-255501.jpg);
+    background-image: url(../images/color-diet-food-255501.jpg);
+    background-color: transparent;
     background-size: cover;
+    background-position: center;
     height: 100%;
     width: auto;
     padding: 18em;
