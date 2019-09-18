@@ -73,8 +73,8 @@ main {
     line-height: 1.5;
     border-radius: .3rem;
     border-color: black;
-    background-color: white;
-    opacity: .8;
+    background-color: lightgrey;
+    
 }
 
 .container {
