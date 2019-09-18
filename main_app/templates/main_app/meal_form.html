@@ -1,17 +1,23 @@
 {% extends 'base.html' %}
 {% block content %}
-    {% if object %}
-    <h1>Edit <span class="teal-text">{{object.model}}</span></h1>
-    {% else %}
-    <h1>Add Meal</h1>
-    {% endif %}
-    <!-- Leaving the action empty makes the form post to the same url used to display it -->
+<hr>
+<!-- Leaving the action empty makes the form post to the same url used to display it -->
     <form action="" method="post">
+        {% if object %}
+        <h1>Edit <span class="teal-text">{{object.model}}</span></h1>
+        {% else %}
+        <h1>Add Meal</h1>
+        {% endif %}
         {% csrf_token %}
         <table>
             <!-- Render the inputs inside of <tr>s & <td>s -->
             {{ form.as_table }}
         </table>
+        {% for photo in meal.photo_set.all %}
+        <img class="responsive-img card-panel" src="{{photo.url}}">
+        {% empty %}
+        <div class="card-panel teal-text center-align">No Photos Uploaded</div>
+        {% endfor %}
         <input type="submit" value="Submit Meal" class="btn">
     </form>
 {% endblock %}

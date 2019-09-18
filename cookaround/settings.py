@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'cookaround.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'wechefn',
     }
 }
@@ -121,6 +121,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/meals'
 
 LOGOUT_REDIRECT_URL = '/'
