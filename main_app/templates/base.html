@@ -32,9 +32,11 @@
             <li class="nav-item active">
               <a class="nav-link" href="{% url 'cart' %}">View Cart <span class="sr-only">(current)</span></a>
             </li>
+            {% if user.chef %}
             <li class="nav-item active">
               <a class="nav-link" href="{% url 'meal_create' %}">Create A Meal <span class="sr-only">(current)</span></a>
             </li>
+            {% endif %}
             <li class="nav-item active">
               <a class="nav-link" href="{% url 'profile' %}">Profile<span class="sr-only">(current)</span></a>
             </li>

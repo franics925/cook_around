@@ -41,4 +41,21 @@
     </form>
   </div>
 
+  <div class="card mb-3">
+    <div class="card-body">
+      <h5 class="card-title">Comments</h5>
+      {% for reviews in meal.review_set.all %}
+      <p class="card-text">{{ reviews.date }}</p>
+      <p class="card-text">
+      {{ reviews.user.username }}: {{ reviews.comment }}
+      </p>
+      {% endfor %}
+      <form action="{% url 'add_review' meal.id %}" method="post">
+        {% csrf_token %}
+        {{ review_form.as_p }}
+        <input type="submit" class="btn" value="Add Comment">
+      </form>
+    </div>
+  </div>
+
 {% endblock %}
