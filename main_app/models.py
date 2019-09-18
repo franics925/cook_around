@@ -47,7 +47,6 @@ class Photo(models.Model):
 
 class Cart(models.Model):
   user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
-  meals = models.ManyToManyField(Meal)
   total = models.DecimalField(default=0.00, max_digits=7, decimal_places=2)
   count = models.IntegerField(default=0, blank=True)
   active = models.BooleanField(default=True)

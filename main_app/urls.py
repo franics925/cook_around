@@ -15,5 +15,5 @@ urlpatterns = [
   path('cart/', views.my_cart, name='cart'),
   path('cart/<int:pk>/rmv_entry/', views.EntryDelete.as_view(), name='rmv_entry'),
   path('cart/<int:pk>/clr_cart/', views.CartDelete.as_view(), name='clr_cart'),
-  # path('cart/<int:pk>/create_tran/', views.create_tran, name='create_tran'),
+  path('cart/<int:pk>/create_tran/', views.create_tran, name='create_tran'),
 ]

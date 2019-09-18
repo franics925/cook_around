@@ -2,11 +2,7 @@
 {% block content %}
 
 <h1>My Cart</h1>
-<form action="{% url 'clr_cart' my_cart.id %}" method="POST">
-    {% csrf_token %}
-    <input type="submit" class="btn" value="Clear Cart">
-    </form>
-<hr />
+
 
 <h1>Entries</h1>
 <h2>{{my_cart.user.username}}</h2>
@@ -40,10 +36,7 @@
 <p>Total Cost: ${{my_cart.total}}</p>
 {% endif %}
 
-<form action="{% url 'create_tran' my_cart.id %}" method="POST">
-    {% csrf_token %}
-    <input type="submit" class="btn" value="Submit Order">
-    </form>
+
 
 {% endblock %}
 

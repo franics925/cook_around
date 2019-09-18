@@ -97,10 +97,12 @@ def add_photo(request, meal_id):
 
 def my_cart(request):
   user = request.user
-  my_cart, created = Cart.objects.get_or_create(user=user, active=True)
-  # my_cart = Cart.objects.filter(user=user, active=True)
-  # if not my_cart:
-  #   my_cart = Cart.objects.create(user=user)
+  filt = {'user': user, 'active': True}
+  # my_cart, created = Cart.objects.get_or_create(user=user, active=True)
+  my_cart = Cart.objects.filter(**filt)
+  print(my_cart)
+  if not my_cart:
+    my_cart = Cart.objects.create(user=user)
   entries = Entry.objects.all()
   if request.POST:
     meal_id = request.POST.get('meal_id')
