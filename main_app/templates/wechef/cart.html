@@ -2,28 +2,60 @@
 {% block content %}
 
 <h1>My Cart</h1>
-<form action="{% url 'clr_cart' my_cart.id %}" method="POST">
-    {% csrf_token %}
-    <input type="submit" class="btn" value="Clear Cart">
-    </form>
+
 <hr />
 
 <h1>Entries</h1>
 <h2>{{my_cart.user.username}}</h2>
 
-
-{% for entry in entries %} 
-<p>{{ entry.meal }} : $ {{ entry.price }}</p>
-<p>x {{ entry.quantity }}</p>
-
-{% empty %}
-Nothing in cart
-
-{% endfor %}
+<table class="striped">
+    <thead>
+      <tr><th>Meal</th><th>Quantity</th><th>Price</th><th>Edit</th></tr>
+    </thead>
+    <tbody>
+        {% for entry in entries %} 
+        <tr>
+          <td>{{entry.meal}}</td>
+          <td>{{entry.price}}</td>
+          <td>{{entry.quantity}}</td>
+          <td>
+          <form action="{% url 'rmv_entry' entry.id %}" method="POST">
+              {% csrf_token %}
+              <input type="submit" class="btn" value="x">
+            </form>
+          </td>
+        </tr>
+        {% empty %}
+        Nothing in cart
+        
+        {% endfor %}
+    </tbody>
+  </table>
 
 {% if my_cart.count %}
 <p>Total meals in cart: {{my_cart.count}}</p>
 <p>Total Cost: ${{my_cart.total}}</p>
+
+<form action="{% url 'clr_cart' my_cart.id %}" method="POST">
+    {% csrf_token %}
+    <input type="submit" class="btn" value="Clear Cart">
+    </form>
+  <form action="{% url 'create_tran' my_cart.id %}" method="POST">
+    {% csrf_token %}
+    <input type="submit" class="btn" value="Submit Order">
+    </form>
+    
 {% endif %}
 
+
+
 {% endblock %}
+
+
+
+class Transaction(models.Model):
+  quantity = models.IntegerField()
+  date = models.DateField()
+  user = models.ForeignKey(User, on_delete=models.CASCADE)
+  meal = models.ForeignKey(Meal, on_delete=models.CASCADE)
+  total = models.DecimalField(default=0.00, max_digits=7, decimal_places=2)
