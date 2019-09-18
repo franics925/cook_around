@@ -11,7 +11,7 @@ from main_app.forms import SignUpForm, ProfileForm
 from .models import Meal, Photo, Cart, Review, Entry, Transaction
 
 import uuid
-import boto3d
+import boto3
 
 S3_BASE_URL = 'https://s3-us-west-1.amazonaws.com/'
 BUCKET = 'wechef'

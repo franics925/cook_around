@@ -1,11 +1,13 @@
     
 *, *::before, *::after {
     box-sizing: border-box;
+    
 }
-
+html{
+    background: rgba(43, 215, 248, 0.1);
+}
 nav {
-    background: rgb(248, 97, 43);
-    opacity: .8;
+    background: rgba(248, 97, 43, 80%);
     border-radius: .3em;
 }
 
@@ -49,10 +51,12 @@ main {
     width: 100%;
 }
 
-h1 {
+#indexpage h1 {
     color: white;
     text-align: center;
     opacity: .8;
+    border: 1em;
+    font-size: 45px;
 }
 
 #homepage.container {
@@ -75,19 +79,23 @@ h1 {
     line-height: 1.2;
     border-radius: .3rem;
     border-color: black;
-    background-color: lightgrey;
+    background-color: rgba(248, 97, 43, 50%);
 }
 
 .container {
     max-width: none;
 }
 
+.card {
+    padding: 10px;
+    border: 50px;
+    border-radius: .5em;
+    background-color: rgba(255, 255, 255, .9);
+}
+
 
 form {
-    padding: 2%;
-    background-color: white;
-    opacity: .85;
-    
+    padding: 1em;    
 }
 
 form, table {
