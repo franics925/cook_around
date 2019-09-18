@@ -1,25 +1,63 @@
 *, *::before, *::after {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
-main {
-    background: rgba(255, 255, 255, 0.4);
-    background-image:url(../images/color-diet-food-255501.jpg);
-    background-position: center;
+
+nav {
+    background: orangered;
+    border: 30px lightgrey;
 }
 
 #headerLogo {
     display: block;
     width: 85px;
     padding: 4px;
-    /* filter: brightness(0) invert(1); */
+    filter: brightness(0) invert(1);
 }
 
 #headerTitle {
-    color: black;
+    color: white;
     text-align: left;
     font: 3em bolder;
 }
+
+ul li {
+    display: flex;
+    flex-direction: row;
+    flex-flow: nowrap;
+    justify-content: space-evenly;
+    align-content: flex-end;
+    list-style-type: none; 
+    filter: brightness(0) invert(1);
+    font-size: 1.2em;}
+
+#homepage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: url(../images/color-diet-food-255501.jpg);
+    background-color: transparent;
+    background-size: cover;
+    background-position: center;
+    height: 100%;
+    width: auto;
+    padding: 18em;
+    color: white;
+}
+    
+main {
+    display: flex;
+    position: absolute;
+    justify-content:center;
+    background: rgba(255, 122, 140, 0.106);
+    /* background-image:url(../images/color-diet-food-255501.jpg); */
+    background-position: center;
+    height: 100%;
+    padding-right: 50px;
+}
+
+
 
 .btn {
     padding: 1 4;
@@ -40,29 +78,9 @@ input.btn {
     max-width: none;
 }
 
-#signup_page {
-    color:red;
+.navbar-toggler-icon {
+    filter: brightness(0) invert(1);
 }
-
-
-ul li{
-    display: flex;
-    flex-direction: row;
-    flex-flow: nowrap;
-    justify-content: space-evenly;
-    align-content: flex-end;
-    list-style-type: none; 
-}
-
-footer {
-    position: relative;
-    background-color: lightgrey;
-    width: 100%;
-    height: 38px;
-    bottom: 0;
-    text-align: center;
-}
-
 
 a {
     padding: 10px;
@@ -70,32 +88,30 @@ a {
     border: 3em;
 }
 
-#homepage {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-image: url(../images/color-diet-food-255501.jpg);
-    background-color: transparent;
-    background-size: cover;
-    background-position: center;
-    height: 100%;
-    width: auto;
-    padding: 18em;
-    color: white;
-}
-
 form {
     padding: 2%;
-
+    
 }
 
 form, table {
     padding: 1 4;
-
+    
 }
 
 h1 {
     padding-left: 2%;
     padding-right: 2%;
 }
+
+
+
+
+
+/* footer {
+    position: relative;
+    background-color: lightgrey;
+    width: 100%;
+    height: 38px;
+    bottom: 0;
+    text-align: center;
+} */
