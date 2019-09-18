@@ -11,12 +11,12 @@ from main_app.forms import SignUpForm, ProfileForm
 from .models import Meal, Photo, Cart, Review, Entry, Transaction
 
 import uuid
-import boto3
+import boto3d
 
 S3_BASE_URL = 'https://s3-us-west-1.amazonaws.com/'
 BUCKET = 'wechef'
 
-# Create your views here.
+# Create your views here.git 
 class MealCreate(LoginRequiredMixin, CreateView):
   model = Meal
   fields = ['name', 'description', 'quantity', 'price']
