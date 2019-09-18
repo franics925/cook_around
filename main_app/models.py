@@ -28,7 +28,7 @@ class Profile(models.Model):
 class Meal(models.Model):
   name = models.CharField(max_length=50)
   description = models.CharField(max_length=50)
-  quantity = models.IntegerField()
+  quantity = models.IntegerField(default=1)
   price = models.DecimalField(default=0.00, max_digits=7, decimal_places=2)
   chef = models.ForeignKey(User, on_delete=models.CASCADE)
 
@@ -73,10 +73,11 @@ def remove_cart(sender, instance, **kwargs):
   instance.cart.save()
 
 class Review(models.Model):
-  user = models.CharField(max_length=100)
+  user = models.ForeignKey(User, on_delete=models.CASCADE)
   comment = models.CharField(max_length=250)
   rating = models.IntegerField(validators=[MaxValueValidator(5), MinValueValidator(1)])
   meal = models.ForeignKey(Meal, on_delete=models.CASCADE)
+  date = models.DateField(auto_now_add=True)
 
 class Transaction(models.Model):
   quantity = models.IntegerField(null=True)

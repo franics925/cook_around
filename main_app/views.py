@@ -140,6 +140,15 @@ def create_tran(request, cart_id):
     'tran': tran
   })
 
+def add_review(request, meal_id):
+  form = ReviewForm(request.POST)
+  if form.is_valid():
+    new_review = form.save(commit=False)
+    new_review.meal_id = meal_id
+    new_review.user = request.user
+    new_review.save()
+  return redirect('details', meal_id=meal_id)
+
 
 # class BlogSearchListView(BlogListView):
 #     """
