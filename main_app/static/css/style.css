@@ -5,6 +5,7 @@
 
 nav {
     background: rgb(248, 97, 43);
+    opacity: .8;
 }
 
 #headerLogo {
@@ -37,19 +38,16 @@ ul li {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* background-image: url(../images/color-diet-food-255501.jpg);
-    background-color: transparent;
-    background-size: cover;
-    background-position: center; */
-    height: 100%;
-    width: 100%;
+    height: 30%;
+    width: 30%;
     padding: 18em;
-    color: white;
-
+    color: black;
+    background-color: white;
+    border-radius: 4%;
+    opacity: .7;
 }
     
 main {
-    display: flex;
     position: absolute;
     justify-content:center;
     align-items: center;
@@ -61,17 +59,12 @@ main {
     padding-right: 50px;
 }
 
-
-
 .btn {
     padding: 1 4;
     font-size: 1.25rem;
     line-height: 1.5;
     border-radius: .3rem;
     border-color: black;
-}
-input.btn {
-
 }
 
 .container {
