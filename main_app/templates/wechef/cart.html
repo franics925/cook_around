@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>My Cart</h1>
 <form action="{% url 'clr_cart' my_cart.id %}" method="POST">
+    <h1>My Cart</h1>
     {% csrf_token %}
     <input type="submit" class="btn" value="Clear Cart">
-    </form>
+</form>
 <hr />
 
 <h1>Entries</h1>
