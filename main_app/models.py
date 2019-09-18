@@ -78,11 +78,11 @@ class Review(models.Model):
   meal = models.ForeignKey(Meal, on_delete=models.CASCADE)
 
 class Transaction(models.Model):
-  quantity = models.IntegerField()
+  quantity = models.IntegerField(null=True)
   date = models.DateField(auto_now_add=True)
   user = models.ForeignKey(User, on_delete=models.CASCADE)
-  meal = models.ForeignKey(Meal, on_delete=models.CASCADE)
+  meal = models.ForeignKey(Meal, on_delete=models.CASCADE, null=True)
   cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
-  total = models.DecimalField(default=0.00, max_digits=7, decimal_places=2)
+  total = models.DecimalField(null=True, default=0.00, max_digits=7, decimal_places=2)
 
 # Create your models here.

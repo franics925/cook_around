@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from decimal import Decimal
 from main_app.forms import SignUpForm, ProfileForm
-from .models import Meal, Photo, Cart, Review, Entry
+from .models import Meal, Photo, Cart, Review, Entry, Transaction
 
 import uuid
 import boto3
@@ -121,13 +121,20 @@ def my_cart(request):
     'entries': entries,
   })
 
-def create_tran(request):
+def create_tran(request, cart_id):
   user = request.user
-  my_cart = Cart.objects.get(user=user)
-  entries = Entry.objects.get(cart=my_cart)
-  meal = Meal.objects.get(id=meal_id)
-  Transaction.create()
-
+  filt = {'user': user, 'active': True}
+  my_cart = Cart.objects.filter(**filt).first()
+  entries = Entry.objects.filter(cart=my_cart)
+  tran = Transaction.objects.create(user=user, cart=my_cart)
+  my_cart.active = False
+  my_cart.save()
+  return render(request, 'wechef/transaction.html', {
+    'my_cart': my_cart,
+    'user': user,
+    'entries': entries,
+    'tran': tran
+  })
 
 
 # class BlogSearchListView(BlogListView):

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Order Complete</h1>
+
+<hr />
+
+<h2>Confirmation #: {{tran.id}}</h2>
+
+<table class="striped">
+    <thead>
+      <tr><th>Meal</th><th>Quantity</th><th>Price</th></tr>
+    </thead>
+    <tbody>
+        {% for entry in entries %} 
+        <tr>
+          <td>{{entry.meal}}</td>
+          <td>{{entry.price}}</td>
+          <td>{{entry.quantity}}</td>
+        </tr>
+        
+        {% endfor %}
+    </tbody>
+  </table>
+
+<p>Total meals in cart: {{my_cart.count}}</p>
+<p>Total Cost: ${{my_cart.total}}</p>
+
+{% endblock %}
