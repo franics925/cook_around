@@ -1,3 +1,21 @@
+Skip to content
+ 
+Search or jump to…
+
+Pull requests
+Issues
+Marketplace
+Explore
+ 
+@franics925 
+2
+0 2 franics925/cook_around
+ Code  Issues 0  Pull requests 1  Projects 0  Wiki  Security  Insights  Settings
+cook_around/main_app/templates/base.html
+ Aly Nguyen fix merge conflicts
+e4878c9 6 minutes ago
+61 lines (58 sloc)  2.57 KB
+    
 {% load static %}
 
 <!DOCTYPE html>
@@ -14,57 +32,49 @@
   <title>WeChef'n</title>
 </head>
 <body>
-<main class="container">
-  <header class="position-sticky">
-    <nav class="navbar navbar-expand-lg navbar-light">
-        <img src="{% static '/images/black-2420162_1920.png' %}" class="d-inline-block align-top" alt="" id="headerLogo">
-        <a class="navbar-brand" href="{% url 'home' %}" id="headerTitle">WeChef'n</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarText">
-          <ul class="navbar-nav ml-auto">
-            {% if user.is_authenticated %}
-            <li class="nav-item active">
-              <a class="nav-link" href="{% url 'index' %}">All Meals <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="{% url 'cart' %}">View Cart <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="{% url 'meal_create' %}">Create A Meal <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="{% url 'profile' %}">Profile<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="{% url 'logout' %}">Log Out<span class="sr-only">(current)</span></a>
-            </li>
-            {% else %}
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'signup' %}">Sign Up</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'login' %}">Log In</a>
-            </li>
-            {% endif %}
-          </ul>
-        </div>
-    </nav>
-  </header>
+<header class="position-sticky">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <img src="{% static '/images/black-2420162_1920.png' %}" class="d-inline-block align-top" alt="" id="headerLogo">
+    <a class="navbar-brand" href="{% url 'home' %}" id="headerTitle">WeChef'n</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav ml-auto">
+        {% if user.is_authenticated %}
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'cart' %}">Cart<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'index' %}">All Meals <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'meal_create' %}">Create A Meal <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'profile' %}">Profile<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'logout' %}">Log Out<span class="sr-only">(current)</span></a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'signup' %}">Sign Up</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'login' %}">Log In</a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+  </nav>
+</header>
   
+<main class="container">
   {% block content %}
   {% endblock %}
 </main>
   
 </body>
-<!-- <footer class="position-sticky">
-    <nav class="navbar navbar-expand-lg navbar-light">
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="{% url 'cart' %}">View Cart <span class="sr-only">(current)</span></a>
-            </li>
-        </ul>
-    </nav>
-</footer> -->
 </html>
+
