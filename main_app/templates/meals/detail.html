@@ -18,6 +18,7 @@
       <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
     </div>
     <div class="card-body row">
+      {% if user == meal.chef %}
       <form action="{% url 'meal_update' meal.id %}" method="POST">
         {% csrf_token %}
         <input type="submit" class="btn" value="Edit">
@@ -26,6 +27,7 @@
         {% csrf_token %}
         <input type="submit" class="btn" value="Delete">
       </form>
+      {% endif %}
       <form action="{% url 'cart' %}" method="POST">
         {% csrf_token %}
         <input type="hidden" value="{{ meal.id }}" name="meal_id">
@@ -33,12 +35,14 @@
         <input type="submit" class="btn" value="Add to Cart">
       </form>
     </div>
+    {% if user == meal.chef %}
     <form action="{% url 'add_photo' meal.id %}" enctype="multipart/form-data" method="POST" class="card-panel">
       {% csrf_token %}
       <input type="file" name="photo-file">
       <br><br>
       <input type="submit" class="btn" value="Upload Photo">
     </form>
+    {% endif %}
   </div>
 
   <div class="card mb-3">
