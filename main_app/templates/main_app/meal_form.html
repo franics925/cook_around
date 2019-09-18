@@ -12,6 +12,11 @@
             <!-- Render the inputs inside of <tr>s & <td>s -->
             {{ form.as_table }}
         </table>
+        {% for photo in meal.photo_set.all %}
+        <img class="responsive-img card-panel" src="{{photo.url}}">
+        {% empty %}
+        <div class="card-panel teal-text center-align">No Photos Uploaded</div>
+        {% endfor %}
         <input type="submit" value="Submit Meal" class="btn">
     </form>
 {% endblock %}

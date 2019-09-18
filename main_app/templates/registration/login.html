@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
-
+<hr>
 <!-- Add the login form -->
-<form method="post" action="{% url 'login' %}">
+<form method="post" action="{% url 'login' %}" class="card" id="loginform">
   <h1>Log In</h1>
   {% csrf_token %}
   {{ form.as_p }}
