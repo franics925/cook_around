@@ -2,10 +2,14 @@
     box-sizing: border-box;
 }
 
-
 nav {
     background: rgb(248, 97, 43);
     opacity: .8;
+    border-radius: .3em;
+}
+
+.navbar-toggler-icon {
+    filter: brightness(0) invert(1);
 }
 
 #headerLogo {
@@ -33,31 +37,35 @@ ul li {
     font-size: 1.2em;
 }
 
-#homepage {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 30%;
-    width: 30%;
-    padding: 18em;
-    color: black;
-    background-color: white;
-    border-radius: 4%;
-    opacity: .7;
-}
-    
 main {
+    display: inline-block;
     position: absolute;
-    justify-content:center;
-    align-items: center;
-    background: rgba(255, 122, 140, 0.106);
     background-image:url(../images/katie-smith-uQs1802D0CQ-unsplash.jpg);
+    background-attachment: fixed;
     background-position: center;
     background-size: cover;
     height: 100%;
-    padding-right: 50px;
+    width: 100%;
 }
+
+#homepage.container {
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    height: 100%;
+    width: 30rem;
+    padding: 4em;
+    color: rgb(41, 41, 41);
+    background-color: white;
+    opacity: .7;
+}
+
+/* #homepage.container {
+    width: auto;
+    padding-top: 100px;
+} */
 
 .btn {
     padding: 1 4;
@@ -65,28 +73,25 @@ main {
     line-height: 1.5;
     border-radius: .3rem;
     border-color: black;
+    background-color: white;
+    opacity: .8;
 }
 
 .container {
-    padding-right: 0em;
-    padding-left: 0em;
-    margin-right: 0em;
-    margin-left: 0em;
     max-width: none;
 }
 
-.navbar-toggler-icon {
-    filter: brightness(0) invert(1);
-}
 
-a {
+/* a {
     padding: 10px;
     color: orange;
     border: 3em;
-}
+} */
 
 form {
     padding: 2%;
+    background-color: white;
+    opacity: .85;
     
 }
 
@@ -95,10 +100,11 @@ form, table {
     
 }
 
-h1 {
+/* h1 {
+    font-size: 50px;
     padding-left: 2%;
     padding-right: 2%;
-}
+} */
 
 
 
