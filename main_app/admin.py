@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Profile, Meal, Photo, Cart, Review, Entry
+from .models import Profile, Meal, Photo, Cart, Review, Entry, Transaction
 
 class EntryAdmin(admin.ModelAdmin):
     def save_model(self, request, obj, form, change):
@@ -14,4 +14,5 @@ admin.site.register(Meal)
 admin.site.register(Photo)
 admin.site.register(Cart)
 admin.site.register(Review)
+admin.site.register(Transaction)
 admin.site.register(Entry, EntryAdmin)
