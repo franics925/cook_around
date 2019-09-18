@@ -67,7 +67,11 @@ def signup(request):
 
 def index(request):
   user = request.user
-  my_cart, created = Cart.objects.get_or_create(user=user)
+  filt = {'user': user, 'active': True}
+  # my_cart, created = Cart.objects.get_or_create(user=user, active=True)
+  my_cart = Cart.objects.filter(**filt).first()
+  if not my_cart:
+    my_cart = Cart.objects.create(user=user)
   meals = Meal.objects.all()
   return render(request, 'meals/index.html', { 'meals': meals })
 
@@ -99,7 +103,7 @@ def my_cart(request):
   user = request.user
   filt = {'user': user, 'active': True}
   # my_cart, created = Cart.objects.get_or_create(user=user, active=True)
-  my_cart = Cart.objects.filter(**filt)
+  my_cart = Cart.objects.filter(**filt).first()
   print(my_cart)
   if not my_cart:
     my_cart = Cart.objects.create(user=user)
