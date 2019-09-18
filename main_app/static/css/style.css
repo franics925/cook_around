@@ -49,6 +49,12 @@ main {
     width: 100%;
 }
 
+h1 {
+    color: white;
+    text-align: center;
+    opacity: .8;
+}
+
 #homepage.container {
     display: flex;
     position: absolute;
@@ -62,11 +68,6 @@ main {
     background-color: white;
     opacity: .7;
 }
-
-/* #homepage.container {
-    width: auto;
-    padding-top: 100px;
-} */
 
 .btn {
     padding: 1 4;
@@ -82,12 +83,6 @@ main {
 }
 
 
-/* a {
-    padding: 10px;
-    color: orange;
-    border: 3em;
-} */
-
 form {
     padding: 2%;
     background-color: white;
@@ -99,16 +94,6 @@ form, table {
     padding: 1 4;
     
 }
-
-/* h1 {
-    font-size: 50px;
-    padding-left: 2%;
-    padding-right: 2%;
-} */
-
-
-
-
 
 footer {
     position: relative;
