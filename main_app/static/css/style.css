@@ -1,48 +1,114 @@
+    
 *, *::before, *::after {
-  box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+nav {
+    background: rgb(248, 97, 43);
+    opacity: .8;
+    border-radius: .3em;
+}
+
+.navbar-toggler-icon {
+    filter: brightness(0) invert(1);
 }
 
 #headerLogo {
     display: block;
     width: 85px;
     padding: 4px;
-    /* filter: brightness(0) invert(1); */
+    filter: brightness(0) invert(1);
 }
 
 #headerTitle {
-    color: black;
+    color: white;
     text-align: left;
     font: 3em bolder;
+    text-shadow: 3em;
 }
 
-.btn {
-    padding: 1 4;
-    font-size: 1.25rem;
-    line-height: 1.5;
-    border-radius: .3rem;
-    border-color: black;
-}
-input.btn {
-
-}
-
-.container {
-    padding-right: 0em;
-    padding-left: 0em;
-    margin-right: 0em;
-    margin-left: 0em;
-    max-width: none;
-}
-
-
-ul li{
+ul li {
     display: flex;
     flex-direction: row;
     flex-flow: nowrap;
     justify-content: space-evenly;
     align-content: flex-end;
     list-style-type: none; 
+    filter: brightness(0) invert(1);
+    font-size: 1.2em;
 }
+
+main {
+    display: inline-block;
+    position: absolute;
+    background-image:url(../images/katie-smith-uQs1802D0CQ-unsplash.jpg);
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+}
+
+#homepage.container {
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    height: 100%;
+    width: 30rem;
+    padding: 4em;
+    color: rgb(41, 41, 41);
+    background-color: white;
+    opacity: .7;
+}
+
+/* #homepage.container {
+    width: auto;
+    padding-top: 100px;
+} */
+
+.btn {
+    padding: 1 4;
+    font-size: 1.25rem;
+    line-height: 1.2;
+    border-radius: .3rem;
+    border-color: black;
+    background-color: lightgrey;
+}
+
+.container {
+    max-width: none;
+}
+
+
+/* a {
+    padding: 10px;
+    color: orange;
+    border: 3em;
+} */
+
+form {
+    padding: 2%;
+    background-color: white;
+    opacity: .85;
+    
+}
+
+form, table {
+    padding: 1 4;
+    
+}
+
+/* h1 {
+    font-size: 50px;
+    padding-left: 2%;
+    padding-right: 2%;
+} */
+
+
+
+
 
 footer {
     position: relative;
@@ -51,38 +117,4 @@ footer {
     height: 38px;
     bottom: 0;
     text-align: center;
-}
-
-
-a {
-    padding: 10px;
-    color: black;
-}
-
-#homepage {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-image:url(../images/color-diet-food-255501.jpg);
-    background-size: cover;
-    height: 100%;
-    width: auto;
-    padding: 18em;
-    color: white;
-}
-
-form {
-    padding: 2%;
-
-}
-
-form, table {
-    padding: 1 4;
-
-}
-
-h1 {
-    padding-left: 2%;
-    padding-right: 2%;
 }

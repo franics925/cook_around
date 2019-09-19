@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 # from django.db.models import Meal
 from main_app.forms import SignUpForm, ProfileForm
-from .models import Meal, Photo
+from .models import Meal, Photo, Cart, Review, Entry, Transaction
 
 import uuid
 import boto3
@@ -29,6 +29,16 @@ class MealDelete(LoginRequiredMixin, DeleteView):
 class MealUpdate(LoginRequiredMixin, UpdateView):
   model = Meal
   fields = ['name', 'description', 'quantity', 'price']
+
+class CartDelete(LoginRequiredMixin, DeleteView):
+  model = Cart
+  def get_success_url(self):
+        return reverse_lazy('cart')
+
+class EntryDelete(LoginRequiredMixin, DeleteView):
+  model = Entry
+  def get_success_url(self):
+        return reverse_lazy('cart')
 
 def home(request):
     return render(request, 'home.html')
@@ -55,6 +65,12 @@ def signup(request):
   return render(request, 'registration/signup.html', context)
 
 def index(request):
+  user = request.user
+  filt = {'user': user, 'active': True}
+  # my_cart, created = Cart.objects.get_or_create(user=user, active=True)
+  my_cart = Cart.objects.filter(**filt).first()
+  if not my_cart:
+    my_cart = Cart.objects.create(user=user)
   meals = Meal.objects.all()
   return render(request, 'meals/index.html', { 'meals': meals })
 
@@ -70,20 +86,68 @@ def meal_detail(request, meal_id):
   })
 
 def add_photo(request, meal_id):
-    photo_file = request.FILES.get('photo-file', None)
-    if photo_file:
-        s3 = boto3.client('s3')
-        key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
-        try:
-            s3.upload_fileobj(photo_file, BUCKET, key)
-            url = f"{S3_BASE_URL}{BUCKET}/{key}"
-            photo = Photo(url=url, meal_id=meal_id)
-            photo.save()
-        except:
-            print('An error occurred uploading file to S3')
-    return redirect('details', meal_id=meal_id)
+  photo_file = request.FILES.get('photo-file', None)
+  if photo_file:
+    s3 = boto3.client('s3')
+    key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+    try:
+      s3.upload_fileobj(photo_file, BUCKET, key)
+      url = f"{S3_BASE_URL}{BUCKET}/{key}"
+      photo = Photo(url=url, meal_id=meal_id)
+      photo.save()
+    except:
+      print('An error occurred uploading file to S3')
+  return redirect('details', meal_id=meal_id)
 
+def my_cart(request):
+  user = request.user
+  filt = {'user': user, 'active': True}
+  # my_cart, created = Cart.objects.get_or_create(user=user, active=True)
+  my_cart = Cart.objects.filter(**filt).first()
+  efilt = {'cart': my_cart, 'active': True}
+  print(my_cart)
+  if not my_cart:
+    my_cart = Cart.objects.create(user=user)
+  entries = Entry.objects.filter(**efilt)
+  if request.POST:
+    meal_id = request.POST.get('meal_id')
+    meal = Meal.objects.get(id=meal_id)
+    quantity = Decimal(request.POST.get('meal_quantity'))
+    price = meal.price
+    if (quantity <= meal.quantity):
+      Entry.objects.create(cart=my_cart, meal=meal, quantity=quantity, price=price)
+  return render(request, 'wechef/cart.html', {
+    'my_cart': my_cart,
+    'user': user,
+    'entries': entries,
+  })
 
+def create_tran(request, cart_id):
+  user = request.user
+  filt = {'user': user, 'active': True}
+  my_cart = Cart.objects.filter(**filt).first()
+  entries = Entry.objects.filter(cart=my_cart)
+  for entry in entries:
+    entry.active = False
+    entry.save()
+  tran = Transaction.objects.create(user=user, cart=my_cart)
+  my_cart.active = False
+  my_cart.save()
+  return render(request, 'wechef/transaction.html', {
+    'my_cart': my_cart,
+    'user': user,
+    'entries': entries,
+    'tran': tran
+  })
+
+def add_review(request, meal_id):
+  form = ReviewForm(request.POST)
+  if form.is_valid():
+    new_review = form.save(commit=False)
+    new_review.meal_id = meal_id
+    new_review.user = request.user
+    new_review.save()
+  return redirect('details', meal_id=meal_id)
 
 
 # class BlogSearchListView(BlogListView):
