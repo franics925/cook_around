@@ -9,6 +9,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from decimal import Decimal
 from main_app.forms import SignUpForm, ProfileForm, ReviewForm
 from .models import Meal, Photo, Cart, Review, Entry, Transaction
+from bootstrap_modal_forms.generic import BSModalCreateView
 
 import uuid
 import boto3
@@ -17,6 +18,13 @@ S3_BASE_URL = 'https://s3-us-west-1.amazonaws.com/'
 BUCKET = 'wechef'
 
 # Create your views here.git 
+
+class ReviewCreateView(BSModalCreateView):
+    template_name = 'meals/review.html'
+    form_class = ReviewForm
+    success_message = 'Review was created'
+    success_url = reverse_lazy('index')
+
 class MealCreate(LoginRequiredMixin, CreateView):
   model = Meal
   fields = ['name', 'description', 'quantity', 'price']

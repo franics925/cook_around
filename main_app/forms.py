@@ -3,6 +3,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from .models import Profile, Entry, Review
+from bootstrap_modal_forms.forms import BSModalForm
 
 class SignUpForm(UserCreationForm):
   first_name = forms.CharField(max_length=30, required=False, help_text='Optional.')
@@ -18,7 +19,7 @@ class ProfileForm(forms.ModelForm):
     model = Profile
     fields = ('chef', 'address1', 'address2', 'city', 'state', 'zipcode')
 
-class ReviewForm(ModelForm):
+class ReviewForm(BSModalForm):
   class Meta:
     model = Review
     fields = ['rating', 'comment']
