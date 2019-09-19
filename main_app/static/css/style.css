@@ -13,6 +13,10 @@ nav {
     border-radius: .3em;
 }
 
+a.nav-link {
+    font-style: bolder;
+    font-size: 24px;
+}
 
 .navbar-toggler-icon {
     filter: brightness(0) invert(1);
@@ -109,11 +113,17 @@ main {
 #loginform.card {
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+    align-items: center;
     justify-content: center;
-    background-color: rgba(179, 179, 179, 0.7);
+    background-color: rgba(255, 255, 255, 0.7);
+    font-size: 22px;
     width: 20em;
     border-radius: 1em;
+    box-shadow: 2px 3px;
+    box-
+    border-style: double;
+    border-color: white;
+    font-style: bolder:
 }
 
 #indexpage h1 {
@@ -219,4 +229,11 @@ footer {
     height: 38px;
     bottom: 0;
     text-align: center;
+}
+
+#cartbody, .container {
+    background-color: rgba(255, 255, 255, .93);
+    border-radius: 1em;
+    /* min-width: 40em; */
+    padding: 1.5em;
 }

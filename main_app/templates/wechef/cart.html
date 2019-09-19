@@ -1,12 +1,14 @@
 {% extends 'base.html' %}
 {% block content %}
+<div class="banner">
+  <h1>{{my_cart.user.username}}'s Cart</h1>
+  
+</div>
 
-<h1>My Cart</h1>
+<div class="continer" id="cartbody">
 
-<hr />
+<h1>Your Food</h1>
 
-<h1>Entries</h1>
-<h2>{{my_cart.user.username}}</h2>
 
 <table class="striped">
     <thead>
@@ -44,6 +46,7 @@
     {% csrf_token %}
     <input type="submit" class="btn" value="Submit Order">
     </form>
+</div>
     
 {% endif %}
 
