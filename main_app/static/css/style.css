@@ -96,6 +96,11 @@ main {
     max-width: none;
 }
 
+#signup_form.card{
+    background-color: rgba(255, 255, 255, .9);
+    border-radius: 1em;
+}
+
 #loginform{
     display: flex;
     justify-content: center;
@@ -108,7 +113,7 @@ main {
     justify-content: center;
     background-color: rgba(179, 179, 179, 0.7);
     width: 20em;
-
+    border-radius: 1em;
 }
 
 #indexpage h1 {
