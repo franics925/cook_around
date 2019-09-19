@@ -11,6 +11,7 @@
     {% for meal in meals %}
     <div class="index_board">
     <a href="{% url 'details' meal.id %}" class="box">
+      <div class="overflow-auto">
       <div class="card overflow-auto" id="mealcard">
       <img class="responsive-img card-panel" id="meal_image" src="https://www.thechunkychef.com/wp-content/uploads/2016/12/Family-Favorite-Baked-Mac-and-Cheese-20.jpg">
     </a>

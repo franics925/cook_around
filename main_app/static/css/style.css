@@ -55,6 +55,8 @@ main {
     background-size: cover;
     height: 100%;
     width: 100%;
+    border-bottom-color: red;
+    border-style: solid;
 }
 
 
@@ -73,14 +75,15 @@ main {
 
 .banner{
     color: rgba(255, 255, 255, .90);
+    font-size: 20px;
 }
 
 .banner h1{
-    font-size: 60px;    
+    font-size: 20px;    
 }
 
 .banner h2 {
-    font-size: 40px;
+    font-size: 20px;
 }
 
 
@@ -119,10 +122,9 @@ main {
     width: 20em;
     border-radius: 1em;
     box-shadow: 2px 3px;
-    box-
     border-style: double;
     border-color: white;
-    font-style: bolder:
+    font-style: bolder;
 }
 
 #indexpage h1 {
@@ -154,14 +156,14 @@ div.banner {
 
 #mealcard.card {
     border-radius: 1em;
-    max-width: 24em;
-    max-height: 15bem;
+    max-width: 18em;
+    max-height: 12em;
     margin: 1em;
     /* background-color: rgba(255, 255, 255, .9); */
 }
 
 #meal_image {
-    max-width: 18em;
+    max-width: 17.5em;
     max-height: 10em;
     padding-top: .3em;
 }
