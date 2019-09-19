@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>My Cart</h1>
+<form action="{% url 'clr_cart' my_cart.id %}" method="POST">
+    {% csrf_token %}
+    <input type="submit" class="btn" value="Clear Cart">
+    </form>
+<hr />
+
+<h1>Entries</h1>
+<h2>{{my_cart.user.username}}</h2>
+
+
+{% for entry in entries %} 
+<p>{{ entry.meal }} : $ {{ entry.price }}</p>
+<p>x {{ entry.quantity }}</p>
+
+{% empty %}
+Nothing in cart
+
+{% endfor %}
+
+{% if my_cart.count %}
+<p>Total meals in cart: {{my_cart.count}}</p>
+<p>Total Cost: ${{my_cart.total}}</p>
+{% endif %}
+
+{% endblock %}

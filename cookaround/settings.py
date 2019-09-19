@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'cookaround.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'wechef',
+        'NAME': 'wechefn',
     }
 }
 
