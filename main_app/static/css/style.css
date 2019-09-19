@@ -1,11 +1,13 @@
     
 *, *::before, *::after {
-    box-sizing: border-box;
-    
+    box-sizing: border-box;   
 }
+
 html{
-    background: rgba(43, 215, 248, 0.1);
+    background-image:url(../images/128-174.jpg);
+    background-repeat: repeat;
 }
+
 nav {
     background: rgba(248, 97, 43, 80%);
     border-radius: .3em;
@@ -66,9 +68,7 @@ main {
     opacity: .7;
 }
 
-input .btn {
-    padding: none;
-}
+
 .btn {
     /* padding: 1 4;
     margin: .3em;
@@ -77,13 +77,10 @@ input .btn {
     border-radius: .3rem;
     border-color: black;
     background-color: rgba(200, 200, 200, 90%);
+    padding: 3px 6px;
 }
-h6 {
-    display: flex;
-    flex-direction: center;
-    justify-content: flex-start;
-    padding: 1em;
-}
+
+
 .container {
     max-width: none;
 }
@@ -102,43 +99,55 @@ h6 {
     display: flex;
     flex-direction: column-reverse;
 }
+
 .index_board {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     flex-wrap: wrap;
+    /* background: rgba(255, 255, 255, .5); */
+
+
 }
 
-.card {
-    margin: .8em;
-    background-color: rgba(255, 255, 255, .9);
-    border-radius: 4%;
-}
 #mealcard.card {
-    max-width: 20em;
-    max-height: 15em;
+    border-radius: 4%;
+    max-width: 31em;
+    max-height: 19.5em;
+    margin: 1em;
+    /* background-color: rgba(255, 255, 255, .9); */
+
 }
 
 #meal_image {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    max-width: 10em;
+    max-width: 18em;
     max-height: 10em;
     padding-top: .3em;
 }
 
-.card-body {
-    background: rgba(255, 255, 1, 0.6);
+div.card-body {
+    background: rgba(255, 255, 255, 1);
     padding: .3em;
     max-height: 10em;
-    border-radius: 4%;
     margin-top: 30px;
 }
 
 
+#quantity {
+    width: 6em;
+}
+
+h6 {
+    display: flex;
+    flex-direction: flex-start;
+    justify-content: flex-start;
+    padding: 1em;
+}
+
 form {
-    padding: none;  
+    padding: none;
+    background: rgba(255, 255, 255, 1);
+
 }
 
 form, table {

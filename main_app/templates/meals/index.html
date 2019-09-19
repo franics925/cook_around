@@ -2,33 +2,33 @@
 {% block content %}
 
 <div class="container-fluid" id="indexpage">
-  <h1>Find Food Near You</h1>
-  <p style="height: 300px; color: white;">From beignets to brisket or chow mein to chowder<br>Browse from a selection of the finest homemade food your neighbors have to offer.</p>
-
+  <div class="banner">
+    <h1>Find Food Near You</h1><br><br>
+    <h2 style="height: 250px; color: white; opacity: 80%;">From beignets to brisket and chow mein to chowder<br>Browse from a selection of the finest homemade food your neighbors have to offer.</h3>
+  </div>
   <div class="container">
     {% for meal in meals %}
     <div class="index_board">
-    <a href="{% url 'details' meal.id %}">
+    <a href="{% url 'details' meal.id %}" class="box">
       <div class="overflow-auto">
-      <div class="card" style="width: 18rem;" id="mealcard">
+      <div class="card" id="mealcard">
       <img class="responsive-img card-panel" id="meal_image" src="https://www.thechunkychef.com/wp-content/uploads/2016/12/Family-Favorite-Baked-Mac-and-Cheese-20.jpg">
     </a>
     <div class="card-body">
-        <h5 class="card-title">{{ meal.name }}</h5>
-        <h6 class="card-subtitle mb-2 ">$ {{ meal.price }}</h6>
-        <p class="card-text">{{ meal.description }}</p>
-        <form action="{% url 'cart' %}" method="POST">
-          {% csrf_token %}
-          <input type="hidden" value="{{ meal.id }}" name="meal_id">
-          <label for="quantity">Quantity</label>
-          <input type="text" value="1" name="meal_quantity" id="quantity">
-          <input type="submit" class="btn" value="Add to Cart">
-        </form>
+      <h5 class="card-title">{{ meal.name }}</h5>
+      <h6 class="card-subtitle mb-2 ">$ {{ meal.price }}</h6>
+      <p class="card-text">{{ meal.description }}</p>
+      <form action="{% url 'cart' %}" method="POST">
+        {% csrf_token %}
+        <input type="hidden" value="{{ meal.id }}" name="meal_id">
+        <label for="quantity">Quantity</label>
+        <input type="text" value="1" name="meal_quantity" id="quantity">
+        <input type="submit" class="btn" value="Add to Cart">
         <h6 class="card-subtitle mb-3 text-muted" >Prepared by: {{ meal.chef }}</h3>
-      </div>
+      </form>
+     </div>
     </div>
   </div>
     {% endfor %}
   </div>
-</div>
 {% endblock %}
