@@ -1,27 +1,36 @@
 {% extends 'base.html' %}
 {% block content %}
-<hr>
 
-<div id="mealform">
-<form action="" method="post" class="form">
-    {% if object %}
-    <h1>Edit <span class="teal-text">{{object.model}}</span></h1>
-    {% else %}
-    <h1>About the meal</h1>
-    {% endif %}
-    {% csrf_token %}
-    <table>
-        <!-- Render the inputs inside of <tr>s & <td>s -->
-    {{ form.as_table }}
-    </table>
-    {% for photo in meal.photo_set.all %}
-    <img class="responsive-img card-panel" src="{{photo.url}}">
-    {% empty %}
-    <input type="file" name="photo-file">
-    <div class="card-panel teal-text center-align">No Photos Uploaded</div>
-    {% endfor %}
-    <input type="submit" value="Submit Meal" class="btn">
-</form>
+<div class="banner">
+    <h1>Get Chef'n!</h1>
+    <h3>Let your neighborhood know what this dish is all about.</h3>
+</div>
+
+<div id="mealform" class="container">
+    <form action="" method="post" class="form-group">
+        {% if object %}
+        <h2 style="border: 3px darkgrey; border-bottom-style: solid; padding-bottom: .3em;">Edit {{ meal.name }} <span class="teal-text">{{object.model}}</span></h2>
+        {% else %}
+        <h2 style="border: 3px darkgrey; border-bottom-style: solid; padding-bottom: .3em;">Tell Us About What You Are Cooking</h2>
+        {% endif %}
+        <div class="row" style="border: 3px darkgrey; border-bottom-style: solid; padding-bottom: .1em;">
+            <div class="col-lg">
+                {% csrf_token %}
+                <table>
+                {{ form.as_table }}
+                </table>
+            </div>
+            <div class="col-sm" >
+                {% for photo in meal.photo_set.all %}
+                <img class="responsive-img card-panel" src="{{photo.url}}">
+                {% empty %}
+                <div class="card-panel teal-text center-align">No Photos Uploaded</div>
+                <input type="file" name="photo-file">
+                {% endfor %}
+            </div>
+        </div>
+        <input type="submit" value="Create Listing" class="btn-primary btn-large" style="margin-top: 1em; padding: 1em; font-size: 18px;">
+    </form>
 </div>
 
 

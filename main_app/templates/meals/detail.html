@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Meal Details</h1>
+<div class="banner">
+  <h2>{{ meal.name }}</h2>
+  <h5>{{ meal.description }}</h5>
+  <h5>Made by {{ meal.chef }}</h5>
+</div>
 
 {% if error_message %}<p class="red-text">{{ error_message }}</p>{% endif %}
 
@@ -45,6 +49,7 @@
     {% endif %}
   </div>
 
+  {% if user != meal.chef %}
   <div class="card mb-3">
     <div class="card-body">
       <h5 class="card-title">Comments</h5>
@@ -61,5 +66,6 @@
       </form>
     </div>
   </div>
+  {% endif %}
 
 {% endblock %}
