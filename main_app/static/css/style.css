@@ -63,9 +63,16 @@ main {
     height: 100%;
     width: 30rem;
     padding: 4em;
-    color: rgb(41, 41, 41);
-    background-color: white;
-    opacity: .7;
+    box-sizing: 100%;
+    padding-top: 27%;
+}
+
+.banner{
+    color: rgba(255, 255, 255, .92);
+}
+
+.banner h1{
+    font-size: 80px;
 }
 
 
@@ -111,7 +118,7 @@ main {
 }
 
 #mealcard.card {
-    border-radius: 4%;
+    border-radius: 1em;
     max-width: 31em;
     max-height: 19.5em;
     margin: 1em;
@@ -145,14 +152,34 @@ h6 {
 }
 
 form {
-    padding: none;
-    background: rgba(255, 255, 255, 1);
-
+    padding: .3em;
+    background: rgba(255, 255, 255, .8);
+    color: rgb(0, 0, 0, .7);
 }
+
 
 form, table {
     padding: 1 4;
-    
+}
+
+th {
+    padding: 1em;
+}
+
+#id_description: {
+    width: 100em;
+}
+
+#mealform {
+    display: flex;
+    justify-content: center;
+    /* height: 100%; */
+}
+
+#mealform, form {
+    border-radius: 1em;
+    min-width: 40em;
+    padding: 2em;
 }
 
 footer {
