@@ -1,1 +1,1 @@
-web: gunicorn cook_around.wsgi
+web: gunicorn cookaround.wsgi
