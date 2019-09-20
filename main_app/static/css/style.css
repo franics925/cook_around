@@ -5,7 +5,6 @@
 
 nav {
     background: rgb(248, 97, 43);
-    opacity: .8;
     border-radius: .3em;
 }
 
@@ -63,10 +62,6 @@ main {
     opacity: .7;
 }
 
-/* #homepage.container {
-    width: auto;
-    padding-top: 100px;
-} */
 
 .btn {
     padding: 1 4;
@@ -81,35 +76,15 @@ main {
     max-width: none;
 }
 
-
-/* a {
-    padding: 10px;
-    color: orange;
-    border: 3em;
-} */
-
 form {
     padding: 2%;
     background-color: white;
-    opacity: .85;
-    
 }
 
 form, table {
     padding: 1 4;
     
 }
-
-/* h1 {
-    font-size: 50px;
-    padding-left: 2%;
-    padding-right: 2%;
-} */
-
-
-
-
-
 footer {
     position: relative;
     background-color: lightgrey;
