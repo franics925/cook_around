@@ -5,7 +5,7 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from main_app.forms import SignUpForm, ProfileForm
+from main_app.forms import SignUpForm, ProfileForm, ReviewForm
 from decimal import *
 from .models import Meal, Photo, Cart, Review, Entry, Transaction
 
@@ -15,7 +15,6 @@ import boto3
 S3_BASE_URL = 'https://s3-us-west-1.amazonaws.com/'
 BUCKET = 'wechef'
 
-# Create your views here.
 class MealCreate(LoginRequiredMixin, CreateView):
   model = Meal
   fields = ['name', 'description', 'quantity', 'price']
@@ -68,7 +67,6 @@ def signup(request):
 def index(request):
   user = request.user
   filt = {'user': user, 'active': True}
-  # my_cart, created = Cart.objects.get_or_create(user=user, active=True)
   my_cart = Cart.objects.filter(**filt).first()
   if not my_cart:
     my_cart = Cart.objects.create(user=user)
@@ -82,8 +80,10 @@ def profile(request):
 
 def meal_detail(request, meal_id):
   meal = Meal.objects.get(id=meal_id)
+  form = ReviewForm()
   return render(request, 'meals/detail.html', {
-    'meal': meal
+    'meal': meal,
+    'form': form,
   })
 
 def add_photo(request, meal_id):
@@ -103,7 +103,6 @@ def add_photo(request, meal_id):
 def my_cart(request):
   user = request.user
   filt = {'user': user, 'active': True}
-  # my_cart, created = Cart.objects.get_or_create(user=user, active=True)
   my_cart = Cart.objects.filter(**filt).first()
   efilt = {'cart': my_cart, 'active': True}
   print(my_cart)
@@ -150,24 +149,3 @@ def add_review(request, meal_id):
     new_review.save()
   return redirect('details', meal_id=meal_id)
 
-
-# class BlogSearchListView(BlogListView):
-#     """
-#     Display a Blog List page filtered by the search query.
-#     """
-#     paginate_by = 10
-
-#     def get_queryset(self):
-#         result = super(BlogSearchListView, self).get_queryset()
-
-#         query = self.request.GET.get('q')
-#         if query:
-#             query_list = query.split()
-#             result = result.filter(
-#                 reduce(operator.and_,
-#                        (Q(title__icontains=q) for q in query_list)) |
-#                 reduce(operator.and_,
-#                        (Q(content__icontains=q) for q in query_list))
-#             )
-
-# return result

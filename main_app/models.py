@@ -75,7 +75,7 @@ def remove_cart(sender, instance, **kwargs):
 class Review(models.Model):
   user = models.ForeignKey(User, on_delete=models.CASCADE)
   comment = models.CharField(max_length=250)
-  rating = models.IntegerField(validators=[MaxValueValidator(5), MinValueValidator(1)])
+  rating = models.IntegerField(null=True, blank=True, validators=[MaxValueValidator(5), MinValueValidator(1)])
   meal = models.ForeignKey(Meal, on_delete=models.CASCADE)
   date = models.DateField(auto_now_add=True)
 
