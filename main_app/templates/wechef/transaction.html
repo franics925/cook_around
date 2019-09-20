@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="text-center">
+    <h1 class="page-title">Order Complete</h1>
+  </div>
+
+<h1>Confirmation #: {{tran.id}}</h2><br>
+
+<div class="card-container d-flex justify-content-around">
+  <div class="card-body">
+
+    <table class="striped tbl-cart table">
+      <thead class="cart-head">
+        <tr><th>Meal</th><th>Price</th><th>Quantity</th></tr>
+      </thead>
+      <tbody>
+        {% for entry in entries %} 
+        <tr>
+          <td>{{entry.meal}}</td>
+          <td>{{entry.price}}</td>
+          <td>{{entry.quantity}}</td>
+        </tr>
+        {% empty %}
+        
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  </div>
+
+<p>Total meals in cart: {{my_cart.count}}</p>
+<p>Total Cost: ${{my_cart.total}}</p>
+
+{% endblock %}

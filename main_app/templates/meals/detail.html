@@ -1,43 +1,85 @@
 {% extends 'base.html' %}
 {% block content %}
+{% load static %}
 
-<h1>Meal Details</h1>
+<div class="text-center">
+    <h1 class="page-title">Meal Details</h1>
+  </div>
 
 {% if error_message %}<p class="red-text">{{ error_message }}</p>{% endif %}
 
-<div class="row">
-  <div class="col s6">
-    <div class="card">
-      <div class="card-content">
+  <div class="row justify-content-center">
+    <div class="card shadow" style="width: 50rem;">
+      <div class="card-body">
         <span class="card-title">{{ chef.name }}</span>
-        <p>Meal: {{ meal.name }}</p>
-        <p>Description: {{ meal.description }}</p>
-        <p>Price: {{ meal.price }}</p>
-        <p>Quantity: {{ meal.quantity }}</p>
-        <div class="card-action">
-          <a href="{% url 'meal_update' meal.id %}">Edit</a>
-          <a href="{% url 'meal_delete' meal.id %}">Delete</a>
-          <form action="{% url 'cart' %}" method="POST">
+        {% for photo in meal.photo_set.all %}
+        <img class="card-img-top" src="{{photo.url}}">
+        {% empty %}
+        <div class="card-body">
+            <img class="card-img-top" src="{% static 'images/food.png' %}" alt="No Image Uploaded">
+        </div>
+        {% endfor %}
+        <div class="text-center card-title">
+        <h1>{{ meal.name }}</h1>
+        </div>
+        <h4 class="card-desc">{{ meal.description }}</h4>
+        <h5 class="card-price">${{ meal.price }}</h5>
+        <p>Quantity Available: {{ meal.quantity }}</p>
+        <div class="col justify-content-center">
+          <div class="text-right add-cart">
+            <form action="{% url 'cart' %}" method="POST">
+              {% csrf_token %}
+              <input type="hidden" value="{{ meal.id }}" name="meal_id">
+              <input class="inp-cart" type="text" value="1" name="meal_quantity">
+              <input type="submit" class="btn" value="Add to Cart">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="card col-6 col-md-4 shadow">
+      <div class="card-body">
+        <h1 class="text-center">Comments</h1><br>
+        {% for reviews in meal.review_set.all %}
+        <p class="card-text">{{ reviews.date }}</p>
+        <p class="card-text">
+          {{ reviews.user.username }}: {{ reviews.comment }}
+        </p><br>
+        {% endfor %}
+        <form action="{% url 'add_review' meal.id %}" method="post">
           {% csrf_token %}
-          <input type="hidden" value="{{ meal.id }}" name="meal_id">
-          <input type="text" value="1" name="meal_quantity">
-          <input type="submit" class="btn" value="Add to Cart">
+          {{ form.as_p }}
+          <input type="submit" class="btn shadow" value="Add Comment">
+        </form>
+      </div>
+    </div>
+    
+    
+    
+    <div class="card d-flex col-6 col-md-4 shadow">
+      <div class="card-body">
+        <h1 class="text-center">Chef Tools</h1>
+        <br><br>
+        <form action="{% url 'meal_update' meal.id %}" method="post">
+            {% csrf_token %}
+            <input type="submit" class="btn shadow" value="Edit">
+          </form>
+        <form action="{% url 'meal_delete' meal.id %}" method="post">
+            {% csrf_token %}
+            <input type="submit" class="btn shadow" value="Delete">
+          </form>
+        <div class="photo"> 
+          <form action="{% url 'add_photo' meal.id %}" enctype="multipart/form-data" method="POST" class="card-panel">
+            {% csrf_token %}
+            <input type="file" name="photo-file">
+            <br><br>
+            <input type="submit" class="btn shadow" value="Upload Photo">
           </form>
         </div>
       </div>
     </div>
-    {% for photo in meal.photo_set.all %}
-    <img class="responsive-img card-panel" src="{{photo.url}}">
-    {% empty %}
-    <div class="card-panel teal-text center-align">No Photos Uploaded</div>
-    {% endfor %}
-    <form action="{% url 'add_photo' meal.id %}" enctype="multipart/form-data" method="POST" class="card-panel">
-      {% csrf_token %}
-      <input type="file" name="photo-file">
-      <br><br>
-      <input type="submit" class="btn" value="Upload Photo">
-    </form>
   </div>
-</div>
+    
 
 {% endblock %}

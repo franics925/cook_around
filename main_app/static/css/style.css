@@ -1,47 +1,181 @@
+    
 *, *::before, *::after {
-  box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Patua One';
+}
+
+nav {
+    background: rgb(248, 97, 43);
+    border-radius: .3em;
+    position: fixed;
+}
+
+hr {
+    height: 0px;
+    border: 2px solid rgb(248, 97, 43);
+}
+
+
+.navbar-toggler-icon {
+    color: white;
+}
+
+.nav-link {
+    font-size: 1.2em;
+    color: white;
+}
+.nav-link:hover {
+    color: white;
+    text-decoration: underline;
 }
 
 #headerLogo {
     display: block;
     width: 85px;
     padding: 4px;
-    /* filter: brightness(0) invert(1); */
+    filter: brightness(0) invert(1);
 }
 
-#headerTitle {
-    color: black;
+.navbar-brand {
+    font-family: 'Patua One';
+    color: white;
     text-align: left;
-    font: 3em bolder;
+    text-shadow: 3em;
+    font-size: 3em;
+}
+
+.navbar-brand:hover {
+    color: white;
+}
+
+ul li {
+    display: flex;
+    flex-direction: row;
+    flex-flow: nowrap;
+    align-content: flex-end;
+    list-style-type: none; 
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+a:hover {
+    color: black;
+    text-decoration: none;
+}
+
+main {
+    display: inline-block;
+    position: absolute;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    /* background-image:url(../images/katie-smith-uQs1802D0CQ-unsplash.jpg); */
+}
+
+.home {
+    display: inline-block;
+    position: absolute;
+    background-image:url(../images/katie-smith-uQs1802D0CQ-unsplash.jpg);
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+}
+
+#homepage.container {
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    height: 100%;
+    width: 30rem;
+    padding: 4em;
+    color: rgb(41, 41, 41);
+    /* background-color: white; */
+    opacity: .8;
+}
+
+#homepage.container h1 {
+    margin-top: 10rem;
+    font-size: 7rem;
+    color: white;
+}
+
+.nav-home {
+    opacity: .8;
+}
+
+#homepage.container h5 {
+    color: white;
+    margin-left: 2rem;
+}
+
+.page-title {
+    font-size: 5rem;
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+}
+
+.card-title {
+    margin-top: 2vh;
+}
+
+.card {
+    margin: 1vh;
+    /* border: 1px solid black; */
+}
+
+.card-foot {
+    margin-bottom: 1vh;
+}
+
+.card-desc {
+    margin-top: 3vh;
+}
+
+.card-price {
+    margin-top: 3vh;
 }
 
 .btn {
     padding: 1 4;
     font-size: 1.25rem;
-    line-height: 1.5;
+    line-height: 1.2;
     border-radius: .3rem;
-    border-color: black;
+    border-color: grey;
+    color: white;
+    background-color: rgb(248, 97, 43);
 }
-input.btn {
 
+.btn:hover {
+    color:  rgb(248, 97, 43);
+    background-color: white;
+    border-color:  rgb(248, 97, 43);
+}
+
+.alink:hover {
+    color: rgb(248, 97, 43);
 }
 
 .container {
-    padding-right: 0em;
-    padding-left: 0em;
-    margin-right: 0em;
-    margin-left: 0em;
     max-width: none;
 }
 
+.btn-new {
+    margin-top: 1rem;
+}
 
-ul li{
-    display: flex;
-    flex-direction: row;
-    flex-flow: nowrap;
-    justify-content: space-evenly;
-    align-content: flex-end;
-    list-style-type: none; 
+form {
+    padding: 2%;
+    background-color: white;
 }
 
 footer {
@@ -53,36 +187,48 @@ footer {
     text-align: center;
 }
 
-
-a {
-    padding: 10px;
-    color: black;
+table {
+    padding: 3vh;
+    text-align: center;
 }
 
-#homepage {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-image:url(../images/color-diet-food-255501.jpg);
-    background-size: cover;
+.cart {
+    margin: 0 auto;
+    padding: 3vh;
+}
+
+.card-head {
+    font-size: 40px;
+}
+
+.card-total {
+    margin-top: 10rem;
+}
+
+.page-card {
+    background-color: white;
+    width: 40%;
+    align-content: center;
+}
+
+.photo {
+    margin-top: 3vh;
+}
+
+.add-cart {
+    margin: 10px;
+}
+
+.inp-cart {
+    padding: 7px;
+    width: 3rem;
     height: 100%;
-    width: auto;
-    padding: 18em;
-    color: white;
+    text-align: center;
+    margin-right: 7px;
+    vertical-align: baseline;
 }
 
-form {
-    padding: 2%;
-
-}
-
-form, table {
-    padding: 1 4;
-
-}
-
-h1 {
-    padding-left: 2%;
-    padding-right: 2%;
+.btn-cart {
+    margin-left: 7px;
+    margin-right: 7px;
 }

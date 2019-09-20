@@ -1,29 +1,62 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>My Cart</h1>
-<form action="{% url 'clr_cart' my_cart.id %}" method="POST">
-    {% csrf_token %}
-    <input type="submit" class="btn" value="Clear Cart">
-    </form>
-<hr />
+<div class="text-center">
+    <h1 class="page-title">My Cart</h1>
+  </div>
 
-<h1>Entries</h1>
-<h2>{{my_cart.user.username}}</h2>
+<div class="justify-content-center">
+  <div class="card cart shadow" style="">
+    <div class="text-center">
+      <h1>Entries</h1>
+    </div>
+      <div class="card-container d-flex justify-content-around">
+        <table class="striped tbl-cart table">
+          <thead class="cart-head">
+            <tr><th>Meal</th><th>Price</th><th>Quantity</th><th>Edit</th></tr>
+          </thead>
+          <tbody>
+            {% for entry in entries %} 
+            <tr>
+              <td>{{entry.meal}}</td>
+              <td>{{entry.price}}</td>
+              <td>{{entry.quantity}}</td>
+              <td>
+                <form action="{% url 'rmv_entry' entry.id %}" method="POST">
+                  {% csrf_token %}
+                  <input type="submit" class="btn shadow" value="x">
+                </form>
+              </td>
+            </tr>
+            {% empty %}
+            
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <div class="text-center cart-total">
+        {% if my_cart.count %}
+        <p>Total meals in cart: {{my_cart.count}}</p>
+        <p>Total Cost: ${{my_cart.total}}</p>
+      </div>
+      
+      
+      <div class="d-flex justify-content-end">
+        <form action="{% url 'clr_cart' my_cart.id %}" method="POST">
+          {% csrf_token %}
+          <input type="submit" class="btn shadow" value="Clear Cart">
+        </form>
+        <form action="{% url 'create_tran' my_cart.id %}" method="POST">
+          {% csrf_token %}
+          <input type="submit" class="btn shadow" value="Submit Order">
+        </form>
+      </div>
+    </div>
+  </div>
+    
+    {% endif %}
 
-
-{% for entry in entries %} 
-<p>{{ entry.meal }} : $ {{ entry.price }}</p>
-<p>x {{ entry.quantity }}</p>
-
-{% empty %}
-Nothing in cart
-
-{% endfor %}
-
-{% if my_cart.count %}
-<p>Total meals in cart: {{my_cart.count}}</p>
-<p>Total Cost: ${{my_cart.total}}</p>
-{% endif %}
-
-{% endblock %}
+    {% endblock %}
+    
+  </div>
+    
