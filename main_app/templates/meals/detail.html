@@ -17,10 +17,10 @@
         <div class="card-panel teal-text center-align">No Photos Uploaded</div>
         {% endfor %}
         <div class="text-center card-title">
-          <h1>{{ meal.name }}</h1>
+        <h1>{{ meal.name }}</h1>
         </div>
-        <h4>{{ meal.description }}</h4>
-        <h5>${{ meal.price }}</h5>
+        <h4 class="card-desc">{{ meal.description }}</h4>
+        <h5 class="card-price">${{ meal.price }}</h5>
         <p>Quantity Available: {{ meal.quantity }}</p>
         <div class="col justify-content-center">
           <div class="text-center">

@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-# from django.db.models import Meal
 from main_app.forms import SignUpForm, ProfileForm
+from decimal import *
 from .models import Meal, Photo, Cart, Review, Entry, Transaction
 
 import uuid

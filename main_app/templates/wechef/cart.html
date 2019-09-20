@@ -1,61 +1,76 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>My Cart</h1>
+<div class="text-center">
+    <h1 class="page-title">My Cart</h1>
+  </div>
 
 <hr />
 
-<h1>Entries</h1>
-<h2>{{my_cart.user.username}}</h2>
 
-<table class="striped">
-    <thead>
-      <tr><th>Meal</th><th>Quantity</th><th>Price</th><th>Edit</th></tr>
-    </thead>
-    <tbody>
-        {% for entry in entries %} 
-        <tr>
-          <td>{{entry.meal}}</td>
-          <td>{{entry.price}}</td>
-          <td>{{entry.quantity}}</td>
-          <td>
-          <form action="{% url 'rmv_entry' entry.id %}" method="POST">
-              {% csrf_token %}
-              <input type="submit" class="btn" value="x">
-            </form>
-          </td>
-        </tr>
-        {% empty %}
-        Nothing in cart
-        
-        {% endfor %}
-    </tbody>
-  </table>
 
-{% if my_cart.count %}
-<p>Total meals in cart: {{my_cart.count}}</p>
-<p>Total Cost: ${{my_cart.total}}</p>
-
-<form action="{% url 'clr_cart' my_cart.id %}" method="POST">
-    {% csrf_token %}
-    <input type="submit" class="btn" value="Clear Cart">
+<div class="justify-content-center">
+  
+  <div class="card cart shadow" style="width: 70rem">
+    <div class="text-center">
+      <h1>Entries</h1>
+    </div>
+      <div class="card-container d-flex justify-content-around">
+        <table class="striped tbl-cart table">
+          <thead class="cart-head">
+            <tr><th>Meal</th><th>Quantity</th><th>Price</th><th>Edit</th></tr>
+          </thead>
+          <tbody>
+            {% for entry in entries %} 
+            <tr>
+              <td>{{entry.meal}}</td>
+              <td>{{entry.price}}</td>
+              <td>{{entry.quantity}}</td>
+              <td>
+                <form action="{% url 'rmv_entry' entry.id %}" method="POST">
+                  {% csrf_token %}
+                  <input type="submit" class="btn" value="x">
+                </form>
+              </td>
+            </tr>
+            {% empty %}
+            Nothing in cart
+            
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <div class="text-right cart-total">
+        {% if my_cart.count %}
+        <p>Total meals in cart: {{my_cart.count}}</p>
+        <p>Total Cost: ${{my_cart.total}}</p>
+      </div>
+    </div>
+      
+    </div>
+    
+    
+    <form action="{% url 'clr_cart' my_cart.id %}" method="POST">
+      {% csrf_token %}
+      <input type="submit" class="btn" value="Clear Cart">
     </form>
-  <form action="{% url 'create_tran' my_cart.id %}" method="POST">
-    {% csrf_token %}
-    <input type="submit" class="btn" value="Submit Order">
+    <form action="{% url 'create_tran' my_cart.id %}" method="POST">
+      {% csrf_token %}
+      <input type="submit" class="btn" value="Submit Order">
     </form>
     
-{% endif %}
-
-
-
-{% endblock %}
-
-
-
-class Transaction(models.Model):
-  quantity = models.IntegerField()
-  date = models.DateField()
-  user = models.ForeignKey(User, on_delete=models.CASCADE)
-  meal = models.ForeignKey(Meal, on_delete=models.CASCADE)
-  total = models.DecimalField(default=0.00, max_digits=7, decimal_places=2)
+    {% endif %}
+    
+    
+    
+    {% endblock %}
+    
+  </div>
+    
+    
+    class Transaction(models.Model):
+    quantity = models.IntegerField()
+    date = models.DateField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    meal = models.ForeignKey(Meal, on_delete=models.CASCADE)
+    total = models.DecimalField(default=0.00, max_digits=7, decimal_places=2)

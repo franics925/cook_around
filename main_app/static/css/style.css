@@ -92,6 +92,14 @@ main {
     margin-bottom: 1vh;
 }
 
+.card-desc {
+    margin-top: 3vh;
+}
+
+.card-price {
+    margin-top: 3vh;
+}
+
 .btn {
     padding: 1 4;
     font-size: 1.25rem;
@@ -110,10 +118,6 @@ form {
     background-color: white;
 }
 
-form, table {
-    padding: 1 4;
-    
-}
 footer {
     position: relative;
     background-color: lightgrey;
@@ -121,4 +125,22 @@ footer {
     height: 38px;
     bottom: 0;
     text-align: center;
+}
+
+table {
+    padding: 3vh;
+    text-align: center;
+}
+
+.cart {
+    margin: 0 auto;
+    padding: 3vh;
+}
+
+.card-head {
+    font-size: 40px;
+}
+
+.card-total {
+    margin-top: 10rem;
 }
