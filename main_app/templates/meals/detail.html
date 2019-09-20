@@ -39,7 +39,6 @@
     </div>
     
     <div class="card col-6 col-md-4 shadow">
-      {% if user == meal.chef %}
       <div class="card-body">
         <h1 class="text-center">Comments</h1><br>
         {% for reviews in meal.review_set.all %}
@@ -54,7 +53,6 @@
           <input type="submit" class="btn shadow" value="Add Comment">
         </form>
       </div>
-      {% endif %}
     </div>
     
     
