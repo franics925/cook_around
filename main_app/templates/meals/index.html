@@ -1,20 +1,35 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class='container-fluid'>
-<h1>Food Near You</h1>
+{% load static %}
+
+<div class="text-center">
+  <h1 class="page-title">Food Near You</h1>
+</div>
+<div class='container-fluid row justify-content-center'>
    {% for meal in meals %}
-   <a href="{% url 'details' meal.id %}">
-    <div class="card" id="mealcard">
-        <div class="card-content">
-            <span class="card-title">{{ meal.name }}</span>
-            <p>Description: {{ meal.description }}</p>
-            <p>Cook Name: {{ meal.chef }}</p>
-            {% for photo in meal.photo_set.all %}
-            <img class="responsive-img card-panel" src="{{photo.url}}">
-            {% empty %}
-            <div class="card-panel teal-text center-align"></div>
-            {% endfor %}
+   <a class="alink" href="{% url 'details' meal.id %}">
+    <div class="card shadow" style="width: 18rem; height: 28rem;" id="mealcard">
+      {% for photo in meal.photo_set.all %}
+      <div class="">
+        <img class="card-img-top" style="height: 13rem;" src="{{photo.url}}">
+      </div>
+      {% empty %}
+      <div class="card-body">
+          <img class="card-img-top" src="{% static 'images/food.png' %}" alt="No Image Uploaded">
+      </div>
+      {% endfor %}
+      <div class="text-center">
+        <h3 class="card-title">{{ meal.name }}</h3>
+      </div>
+      <div class="card-body">
+          <p>{{ meal.description }}</p>
+          <!-- <p>Quantity Available: {{ meal.quantity }}</p> -->
         </div>
+      <div class="text-center card-foot">
+        <small class="text-muted">
+          Cook Name: {{ meal.chef }}
+        </small>
+      </div>
     </div>
   </a>
     {% endfor %}

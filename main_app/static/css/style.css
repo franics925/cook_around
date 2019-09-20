@@ -6,7 +6,9 @@
 nav {
     background: rgb(248, 97, 43);
     border-radius: .3em;
+    position: fixed;
 }
+
 
 .navbar-toggler-icon {
     filter: brightness(0) invert(1);
@@ -37,14 +39,23 @@ ul li {
     font-size: 1.2em;
 }
 
+a {
+    color: black;
+    text-decoration: none;
+}
+
+a:hover {
+    color: black;
+    text-decoration: none;
+}
+
 main {
     display: inline-block;
     position: absolute;
-    background-image:url(../images/katie-smith-uQs1802D0CQ-unsplash.jpg);
+    /* background-image:url(../images/katie-smith-uQs1802D0CQ-unsplash.jpg); */
     background-attachment: fixed;
     background-position: center;
     background-size: cover;
-    height: 100%;
     width: 100%;
 }
 
@@ -62,6 +73,24 @@ main {
     opacity: .7;
 }
 
+.page-title {
+    font-size: 5rem;
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+}
+
+.card-title {
+    margin-top: 2vh;
+}
+
+.card {
+    margin: 1vh;
+    /* border: 1px solid black; */
+}
+
+.card-foot {
+    margin-bottom: 1vh;
+}
 
 .btn {
     padding: 1 4;
