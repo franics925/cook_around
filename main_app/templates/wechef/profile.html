@@ -31,18 +31,18 @@
   <div class="card-body">
     <table class="striped tbl-cart table">
       <thead class="cart-head">
-        <tr><th>Confirmation #</th><th>Date</th><th>Edit</th></tr>
+        <tr><th>Confirmation #</th><th>Date</th><th>Total</th></tr>
       </thead>
       <tbody>
         {% for tran in trans %}
           <tr>
             <td>{{tran.id}}</td>
-            <td>{{tran.user}}</td>
-            <td>{{tran.cart}}</td>
+            <td>{{tran.date}}</td>
+            <td>{{tran.cart.total}}</td>
           </tr>
+          {% endfor %}
         </tbody>
       </table>
-    {% endfor %}
   </div>
 </div>
 
