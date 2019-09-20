@@ -5,7 +5,7 @@
 <div class="text-center">
   <h1 class="page-title">Food Near You</h1>
 </div>
-<hr />
+
 <div class='container-fluid row justify-content-center'>
    {% for meal in meals %}
    <a class="alink" href="{% url 'details' meal.id %}">
@@ -24,7 +24,6 @@
       </div>
       <div class="card-body">
           <p>{{ meal.description }}</p>
-          <!-- <p>Quantity Available: {{ meal.quantity }}</p> -->
         </div>
       <div class="text-center card-foot">
         <small class="text-muted">

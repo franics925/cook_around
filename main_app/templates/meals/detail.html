@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
+{% load static %}
 
 <div class="text-center">
     <h1 class="page-title">Meal Details</h1>
@@ -14,7 +15,9 @@
         {% for photo in meal.photo_set.all %}
         <img class="card-img-top" src="{{photo.url}}">
         {% empty %}
-        <div class="card-panel teal-text center-align">No Photos Uploaded</div>
+        <div class="card-body">
+            <img class="card-img-top" src="{% static 'images/food.png' %}" alt="No Image Uploaded">
+        </div>
         {% endfor %}
         <div class="text-center card-title">
         <h1>{{ meal.name }}</h1>

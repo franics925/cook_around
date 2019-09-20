@@ -73,10 +73,11 @@ def index(request):
   meals = Meal.objects.all()
   return render(request, 'meals/index.html', { 'meals': meals })
 
+@login_required
 def profile(request):
   user = request.user
-  print(user)
-  return render(request, 'wechef/profile.html', {'user': user})
+  trans = Transaction.objects.filter(user=user)
+  return render(request, 'wechef/profile.html', {'user': user, 'trans': trans})
 
 def meal_detail(request, meal_id):
   meal = Meal.objects.get(id=meal_id)
@@ -86,6 +87,7 @@ def meal_detail(request, meal_id):
     'form': form,
   })
 
+@login_required
 def add_photo(request, meal_id):
   photo_file = request.FILES.get('photo-file', None)
   if photo_file:
@@ -122,6 +124,7 @@ def my_cart(request):
     'entries': entries,
   })
 
+@login_required
 def create_tran(request, cart_id):
   user = request.user
   filt = {'user': user, 'active': True}
@@ -140,6 +143,7 @@ def create_tran(request, cart_id):
     'tran': tran
   })
 
+@login_required
 def add_review(request, meal_id):
   form = ReviewForm(request.POST)
   if form.is_valid():

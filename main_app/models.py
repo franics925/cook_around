@@ -85,6 +85,7 @@ class Transaction(models.Model):
   user = models.ForeignKey(User, on_delete=models.CASCADE)
   meal = models.ForeignKey(Meal, on_delete=models.CASCADE, null=True)
   cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
+  date = models.DateField(auto_now_add=True)
   total = models.DecimalField(null=True, default=0.00, max_digits=7, decimal_places=2)
 
 # Create your models here.
