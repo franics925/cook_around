@@ -6,12 +6,8 @@
   </div>
 
 <hr />
-
-
-
 <div class="justify-content-center">
-  
-  <div class="card cart shadow" style="width: 70rem">
+  <div class="card cart shadow" style="">
     <div class="text-center">
       <h1>Entries</h1>
     </div>
@@ -29,48 +25,39 @@
               <td>
                 <form action="{% url 'rmv_entry' entry.id %}" method="POST">
                   {% csrf_token %}
-                  <input type="submit" class="btn" value="x">
+                  <input type="submit" class="btn shadow" value="x">
                 </form>
               </td>
             </tr>
             {% empty %}
-            Nothing in cart
             
             {% endfor %}
           </tbody>
         </table>
       </div>
-      <div class="text-right cart-total">
+      <div class="text-center cart-total">
         {% if my_cart.count %}
         <p>Total meals in cart: {{my_cart.count}}</p>
         <p>Total Cost: ${{my_cart.total}}</p>
       </div>
-    </div>
       
+      
+      <div class="d-flex justify-content-end">
+        <form action="{% url 'clr_cart' my_cart.id %}" method="POST">
+          {% csrf_token %}
+          <input type="submit" class="btn shadow" value="Clear Cart">
+        </form>
+        <form action="{% url 'create_tran' my_cart.id %}" method="POST">
+          {% csrf_token %}
+          <input type="submit" class="btn shadow" value="Submit Order">
+        </form>
+      </div>
     </div>
-    
-    
-    <form action="{% url 'clr_cart' my_cart.id %}" method="POST">
-      {% csrf_token %}
-      <input type="submit" class="btn" value="Clear Cart">
-    </form>
-    <form action="{% url 'create_tran' my_cart.id %}" method="POST">
-      {% csrf_token %}
-      <input type="submit" class="btn" value="Submit Order">
-    </form>
+  </div>
     
     {% endif %}
-    
-    
-    
+
     {% endblock %}
     
   </div>
     
-    
-    class Transaction(models.Model):
-    quantity = models.IntegerField()
-    date = models.DateField()
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    meal = models.ForeignKey(Meal, on_delete=models.CASCADE)
-    total = models.DecimalField(default=0.00, max_digits=7, decimal_places=2)

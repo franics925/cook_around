@@ -21,6 +21,6 @@ class ProfileForm(forms.ModelForm):
 class ReviewForm(ModelForm):
   class Meta:
     model = Review
-    fields = ['comment']
+    fields = ['rating', 'comment']
 
 
